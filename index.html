@@ -1,0 +1,1900 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timetrack</title>
+  <style>
+    :root {
+      --bg-1: #08111d;
+      --bg-2: #16251f;
+      --panel: rgba(15, 23, 32, 0.84);
+      --panel-border: rgba(222, 238, 255, 0.14);
+      --card: rgba(18, 29, 40, 0.92);
+      --text: #eff7ff;
+      --muted: #a9b7c9;
+      --accent: #4ee0b4;
+      --accent-strong: #2abf96;
+      --accent-text: #06130f;
+      --ok: #65e4ac;
+      --error: #ff8b8b;
+      --ring: rgba(78, 224, 180, 0.28);
+      --shadow: 0 24px 58px rgba(0, 0, 0, 0.34);
+      --field-label: #bfd0e7;
+      --input-bg: #0d1823;
+      --input-border: rgba(184, 207, 236, 0.26);
+      --button-soft-bg: rgba(255, 255, 255, 0.08);
+      --button-soft-hover: rgba(255, 255, 255, 0.14);
+      --quick-bg: rgba(78, 224, 180, 0.1);
+      --quick-border: rgba(78, 224, 180, 0.28);
+      --quick-hover: rgba(78, 224, 180, 0.18);
+      --output-bg: linear-gradient(180deg, rgba(18, 34, 48, 0.96), rgba(12, 24, 36, 0.96));
+      --output-border: rgba(114, 158, 209, 0.25);
+      --output-text: #dbeaff;
+      --result-border: rgba(181, 207, 240, 0.14);
+      --result-label: #9eb3cf;
+      --result-value: #eff7ff;
+      --result-status-bg: rgba(101, 228, 172, 0.14);
+      --result-status-text: #65e4ac;
+      --dialog-bg: #101c28;
+      --modal-panel: rgba(255, 255, 255, 0.06);
+      --popover: rgba(14, 24, 34, 0.96);
+      --shape-a: radial-gradient(circle at 30% 30%, #41d6bd, #123d45);
+      --shape-b: radial-gradient(circle at 70% 40%, #ffb35c, #4e2a1c);
+      --globe-line: rgba(255, 255, 255, 0.32);
+      --globe-line-soft: rgba(255, 255, 255, 0.2);
+      --radius: 18px;
+    }
+
+    body[data-theme="daylight"] {
+      --bg-1: #f4f8ff;
+      --bg-2: #dde9ff;
+      --panel: rgba(255, 255, 255, 0.78);
+      --panel-border: rgba(18, 48, 94, 0.15);
+      --card: rgba(255, 255, 255, 0.86);
+      --text: #14223d;
+      --muted: #52617f;
+      --accent: #165dff;
+      --accent-strong: #0f45be;
+      --accent-text: #ffffff;
+      --ok: #1f8f5f;
+      --error: #ba1f1f;
+      --ring: rgba(22, 93, 255, 0.25);
+      --shadow: 0 20px 50px rgba(20, 34, 61, 0.14);
+      --field-label: #2e446d;
+      --input-bg: #ffffff;
+      --input-border: #c5d5f6;
+      --button-soft-bg: #e8efff;
+      --button-soft-hover: #d8e5ff;
+      --quick-bg: #eef4ff;
+      --quick-border: #c9d8fb;
+      --quick-hover: #d8e5ff;
+      --output-bg: linear-gradient(180deg, #f6f9ff, #ecf3ff);
+      --output-border: #cfddfb;
+      --output-text: #173261;
+      --result-border: rgba(65, 105, 170, 0.14);
+      --result-label: #53678d;
+      --result-value: #102a5c;
+      --result-status-bg: #e5f7ee;
+      --result-status-text: #16724c;
+      --dialog-bg: #ffffff;
+      --modal-panel: #f1f5ff;
+      --popover: rgba(255, 255, 255, 0.96);
+      --shape-a: radial-gradient(circle at 30% 30%, #8ec0ff, #3c7eff);
+      --shape-b: radial-gradient(circle at 70% 40%, #8ff5d8, #35c89d);
+      --globe-line: rgba(20, 34, 61, 0.28);
+      --globe-line-soft: rgba(20, 34, 61, 0.18);
+    }
+
+    body[data-theme="moss"] {
+      --bg-1: #eef8f0;
+      --bg-2: #d4eadb;
+      --panel: rgba(250, 255, 250, 0.82);
+      --panel-border: rgba(42, 89, 63, 0.18);
+      --card: rgba(255, 255, 252, 0.9);
+      --text: #183227;
+      --muted: #526b5f;
+      --accent: #287a4b;
+      --accent-strong: #1e5d39;
+      --accent-text: #ffffff;
+      --ok: #287a4b;
+      --error: #a02b32;
+      --ring: rgba(40, 122, 75, 0.26);
+      --shadow: 0 20px 50px rgba(35, 75, 55, 0.16);
+      --field-label: #2d5944;
+      --input-bg: #ffffff;
+      --input-border: #b8d7c4;
+      --button-soft-bg: #e2f1e7;
+      --button-soft-hover: #d1e8da;
+      --quick-bg: #e5f4ea;
+      --quick-border: #badbc6;
+      --quick-hover: #d4ecde;
+      --output-bg: linear-gradient(180deg, #f5fbf6, #eaf5ee);
+      --output-border: #c6decf;
+      --output-text: #1a3b2b;
+      --result-border: rgba(42, 89, 63, 0.16);
+      --result-label: #5d7468;
+      --result-value: #173729;
+      --result-status-bg: #daf1e3;
+      --result-status-text: #21683f;
+      --dialog-bg: #fbfffb;
+      --modal-panel: #edf7f0;
+      --popover: rgba(255, 255, 252, 0.96);
+      --shape-a: radial-gradient(circle at 30% 30%, #7fdca2, #2c7b51);
+      --shape-b: radial-gradient(circle at 70% 40%, #f0c46c, #ba8430);
+    }
+
+    body[data-theme="coral"] {
+      --bg-1: #fff3f0;
+      --bg-2: #dff8f5;
+      --panel: rgba(255, 252, 249, 0.82);
+      --panel-border: rgba(142, 66, 55, 0.16);
+      --card: rgba(255, 255, 253, 0.9);
+      --text: #33231f;
+      --muted: #745c55;
+      --accent: #d9543f;
+      --accent-strong: #b63d2b;
+      --accent-text: #ffffff;
+      --ok: #197b68;
+      --error: #b42438;
+      --ring: rgba(217, 84, 63, 0.25);
+      --shadow: 0 20px 50px rgba(80, 55, 48, 0.14);
+      --field-label: #71453d;
+      --input-bg: #ffffff;
+      --input-border: #f0c6bc;
+      --button-soft-bg: #ffe4df;
+      --button-soft-hover: #ffd3cb;
+      --quick-bg: #fff0ed;
+      --quick-border: #f2c7be;
+      --quick-hover: #ffe0da;
+      --output-bg: linear-gradient(180deg, #fff8f6, #edf8f6);
+      --output-border: #edc7bf;
+      --output-text: #4a2b25;
+      --result-border: rgba(142, 66, 55, 0.16);
+      --result-label: #84645e;
+      --result-value: #39241f;
+      --result-status-bg: #dff4ee;
+      --result-status-text: #146e5c;
+      --dialog-bg: #fffdfb;
+      --modal-panel: #fff0ed;
+      --popover: rgba(255, 253, 251, 0.96);
+      --shape-a: radial-gradient(circle at 30% 30%, #ff9a86, #d9543f);
+      --shape-b: radial-gradient(circle at 70% 40%, #7fded3, #279889);
+    }
+
+    body[data-theme="cyber-ember"] {
+      --bg-1: #050608;
+      --bg-2: #22110c;
+      --panel: rgba(14, 15, 18, 0.86);
+      --panel-border: rgba(250, 88, 45, 0.24);
+      --card: rgba(20, 22, 26, 0.92);
+      --text: #fff8f4;
+      --muted: #c8bbb5;
+      --accent: #fa582d;
+      --accent-strong: #d9431b;
+      --accent-text: #ffffff;
+      --ok: #ff8b60;
+      --error: #ff9a9a;
+      --ring: rgba(250, 88, 45, 0.28);
+      --shadow: 0 24px 62px rgba(0, 0, 0, 0.42);
+      --field-label: #e4c7bd;
+      --input-bg: #111317;
+      --input-border: rgba(250, 88, 45, 0.28);
+      --button-soft-bg: rgba(250, 88, 45, 0.1);
+      --button-soft-hover: rgba(250, 88, 45, 0.18);
+      --quick-bg: rgba(250, 88, 45, 0.11);
+      --quick-border: rgba(250, 88, 45, 0.3);
+      --quick-hover: rgba(250, 88, 45, 0.19);
+      --output-bg: linear-gradient(180deg, rgba(27, 19, 18, 0.98), rgba(13, 14, 17, 0.98));
+      --output-border: rgba(250, 88, 45, 0.28);
+      --output-text: #fff3ed;
+      --result-border: rgba(250, 88, 45, 0.18);
+      --result-label: #d6afa3;
+      --result-value: #fff8f4;
+      --result-status-bg: rgba(250, 88, 45, 0.17);
+      --result-status-text: #ff9a72;
+      --dialog-bg: #0f1217;
+      --modal-panel: rgba(250, 88, 45, 0.08);
+      --popover: rgba(14, 15, 18, 0.96);
+      --shape-a: radial-gradient(circle at 30% 30%, #fa582d, #5b1609);
+      --shape-b: radial-gradient(circle at 70% 40%, #fff8f4, #35201a);
+    }
+
+    body[data-theme="signal-grove"] {
+      --bg-1: #061511;
+      --bg-2: #113126;
+      --panel: rgba(8, 24, 20, 0.84);
+      --panel-border: rgba(77, 224, 163, 0.22);
+      --card: rgba(12, 31, 26, 0.92);
+      --text: #effff8;
+      --muted: #a7c9ba;
+      --accent: #41d690;
+      --accent-strong: #26b574;
+      --accent-text: #04130d;
+      --ok: #6af0b0;
+      --error: #ff9292;
+      --ring: rgba(65, 214, 144, 0.28);
+      --shadow: 0 24px 58px rgba(0, 0, 0, 0.34);
+      --field-label: #b7decf;
+      --input-bg: #081b17;
+      --input-border: rgba(130, 220, 185, 0.26);
+      --button-soft-bg: rgba(65, 214, 144, 0.1);
+      --button-soft-hover: rgba(65, 214, 144, 0.17);
+      --quick-bg: rgba(65, 214, 144, 0.1);
+      --quick-border: rgba(65, 214, 144, 0.28);
+      --quick-hover: rgba(65, 214, 144, 0.18);
+      --output-bg: linear-gradient(180deg, rgba(13, 39, 32, 0.97), rgba(7, 23, 20, 0.97));
+      --output-border: rgba(106, 240, 176, 0.22);
+      --output-text: #e8fff5;
+      --result-border: rgba(151, 230, 199, 0.14);
+      --result-label: #9dc8b8;
+      --result-value: #f0fff8;
+      --result-status-bg: rgba(106, 240, 176, 0.14);
+      --result-status-text: #6af0b0;
+      --dialog-bg: #091915;
+      --modal-panel: rgba(65, 214, 144, 0.08);
+      --popover: rgba(8, 24, 20, 0.96);
+      --shape-a: radial-gradient(circle at 30% 30%, #41d690, #0c4d36);
+      --shape-b: radial-gradient(circle at 70% 40%, #8ad9ff, #16485f);
+    }
+
+    body[data-theme="sky-prism"] {
+      --bg-1: #071020;
+      --bg-2: #0d3157;
+      --panel: rgba(9, 21, 38, 0.84);
+      --panel-border: rgba(114, 196, 255, 0.22);
+      --card: rgba(12, 28, 50, 0.92);
+      --text: #eef8ff;
+      --muted: #a9c1d8;
+      --accent: #55b9ff;
+      --accent-strong: #2f8ed5;
+      --accent-text: #04101c;
+      --ok: #7dd9ff;
+      --error: #ff8fa3;
+      --ring: rgba(85, 185, 255, 0.28);
+      --shadow: 0 24px 58px rgba(0, 0, 0, 0.35);
+      --field-label: #bdd5ec;
+      --input-bg: #0b1a2e;
+      --input-border: rgba(130, 190, 235, 0.28);
+      --button-soft-bg: rgba(85, 185, 255, 0.1);
+      --button-soft-hover: rgba(85, 185, 255, 0.18);
+      --quick-bg: rgba(85, 185, 255, 0.1);
+      --quick-border: rgba(85, 185, 255, 0.28);
+      --quick-hover: rgba(85, 185, 255, 0.18);
+      --output-bg: linear-gradient(180deg, rgba(13, 36, 64, 0.97), rgba(7, 19, 36, 0.97));
+      --output-border: rgba(114, 196, 255, 0.24);
+      --output-text: #edf8ff;
+      --result-border: rgba(156, 210, 250, 0.14);
+      --result-label: #a9c3dc;
+      --result-value: #f2faff;
+      --result-status-bg: rgba(125, 217, 255, 0.14);
+      --result-status-text: #7dd9ff;
+      --dialog-bg: #091629;
+      --modal-panel: rgba(85, 185, 255, 0.08);
+      --popover: rgba(9, 21, 38, 0.96);
+      --shape-a: radial-gradient(circle at 30% 30%, #55b9ff, #0e4d82);
+      --shape-b: radial-gradient(circle at 70% 40%, #7bf4d8, #145e58);
+    }
+
+    body[data-theme="yoho"] {
+      --bg-1: #dcbf83;
+      --bg-2: #6fb5a6;
+      --page-bg:
+        radial-gradient(ellipse at 18% 22%, rgba(61, 143, 95, 0.28) 0 7%, transparent 8%),
+        radial-gradient(ellipse at 74% 66%, rgba(20, 127, 140, 0.2) 0 11%, transparent 12%),
+        radial-gradient(circle at 36% 58%, transparent 0 18%, rgba(88, 54, 27, 0.18) 18.4%, transparent 19%),
+        radial-gradient(circle at 62% 30%, transparent 0 22%, rgba(88, 54, 27, 0.14) 22.4%, transparent 23%),
+        linear-gradient(35deg, transparent 0 56%, rgba(88, 54, 27, 0.14) 57%, transparent 58%),
+        linear-gradient(124deg, transparent 0 38%, rgba(88, 54, 27, 0.12) 39%, transparent 40%),
+        linear-gradient(145deg, #e7d29d, #b28b55 48%, #5aa79f);
+      --panel:
+        linear-gradient(180deg, rgba(242, 213, 154, 0.9), rgba(186, 128, 69, 0.9)),
+        repeating-linear-gradient(90deg, rgba(91, 50, 25, 0.28) 0 14px, rgba(154, 92, 43, 0.25) 14px 30px);
+      --panel-border: rgba(78, 43, 22, 0.42);
+      --card:
+        linear-gradient(180deg, rgba(251, 228, 173, 0.92), rgba(222, 188, 124, 0.92));
+      --text: #2d1b10;
+      --muted: #6a4c2b;
+      --accent: #147f8c;
+      --accent-strong: #0f6370;
+      --accent-text: #fff8df;
+      --ok: #137b4e;
+      --error: #a72b23;
+      --ring: rgba(20, 127, 140, 0.28);
+      --shadow: 0 22px 44px rgba(62, 37, 18, 0.3);
+      --field-label: #5a351b;
+      --input-bg: #fff2c9;
+      --input-border: #9c6a36;
+      --button-soft-bg: rgba(73, 42, 22, 0.11);
+      --button-soft-hover: rgba(73, 42, 22, 0.18);
+      --quick-bg: rgba(20, 127, 140, 0.1);
+      --quick-border: rgba(20, 127, 140, 0.28);
+      --quick-hover: rgba(20, 127, 140, 0.18);
+      --output-bg: linear-gradient(180deg, #f9e5ad, #d9b678);
+      --output-border: #8b5b2c;
+      --output-text: #2d1b10;
+      --result-border: rgba(88, 54, 27, 0.22);
+      --result-label: #76502a;
+      --result-value: #2d1b10;
+      --result-status-bg: rgba(20, 127, 140, 0.14);
+      --result-status-text: #0f6370;
+      --dialog-bg:
+        linear-gradient(180deg, #f6dca0, #d8ac68),
+        repeating-linear-gradient(90deg, rgba(90, 48, 22, 0.2) 0 16px, rgba(140, 82, 40, 0.18) 16px 32px);
+      --modal-panel: rgba(255, 239, 191, 0.58);
+      --popover: rgba(255, 231, 176, 0.96);
+      --shape-a: radial-gradient(circle at 30% 30%, #74cbb7, #176f73);
+      --shape-b: radial-gradient(circle at 70% 40%, #f5d577, #b06b28);
+      --globe-line: rgba(48, 30, 15, 0.38);
+      --globe-line-soft: rgba(48, 30, 15, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "Avenir Next", "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background: var(--page-bg, linear-gradient(145deg, var(--bg-1), var(--bg-2)));
+      display: grid;
+      place-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .bg-shape {
+      position: fixed;
+      z-index: -1;
+      border-radius: 999px;
+      filter: blur(0.5px);
+      opacity: 0.35;
+      pointer-events: none;
+      overflow: hidden;
+      color: var(--globe-line);
+    }
+
+    .bg-shape::before,
+    .bg-shape::after {
+      display: none;
+    }
+
+    .globe-linework {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.72;
+    }
+
+    .globe-grid {
+      stroke-width: 0.75;
+      opacity: 0.55;
+    }
+
+    .globe-land {
+      display: none;
+    }
+
+    .shape-a {
+      width: 480px;
+      height: 480px;
+      background: var(--shape-a);
+      top: -120px;
+      left: -100px;
+    }
+
+    .shape-b {
+      width: 360px;
+      height: 360px;
+      background: var(--shape-b);
+      bottom: -110px;
+      right: -80px;
+    }
+
+    .app {
+      width: min(1050px, 100%);
+      backdrop-filter: blur(10px);
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: calc(var(--radius) + 4px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: fade-up 500ms ease;
+    }
+
+    body[data-theme="yoho"] .app,
+    body[data-theme="yoho"] dialog {
+      border-width: 2px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 236, 178, 0.35),
+        0 22px 44px rgba(62, 37, 18, 0.32);
+    }
+
+    body[data-theme="yoho"] .header {
+      background:
+        linear-gradient(180deg, rgba(111, 64, 28, 0.32), rgba(71, 42, 22, 0.14)),
+        repeating-linear-gradient(90deg, rgba(72, 39, 18, 0.12) 0 18px, transparent 18px 36px);
+    }
+
+    .header {
+      padding: 1.2rem 1.4rem;
+      border-bottom: 1px solid var(--panel-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      position: relative;
+    }
+
+    body[data-theme="yoho"] .brand::before {
+      content: "🌴";
+      position: absolute;
+      left: -1.25rem;
+      top: -1.2rem;
+      z-index: 0;
+      font-size: 4.2rem;
+      line-height: 1;
+      opacity: 0.28;
+      transform: rotate(-12deg);
+      pointer-events: none;
+    }
+
+    .brand > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .theme-menu {
+      position: relative;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .emoji-icon {
+      line-height: 1;
+    }
+
+    .theme-dot {
+      width: 0.9rem;
+      height: 0.9rem;
+      border-radius: 50%;
+      background: conic-gradient(from 90deg, var(--accent), var(--bg-2), var(--text), var(--accent));
+      border: 1px solid var(--panel-border);
+    }
+
+    .theme-panel {
+      position: absolute;
+      top: calc(100% + 0.55rem);
+      right: 0;
+      z-index: 30;
+      display: flex;
+      gap: 0.45rem;
+      align-items: center;
+      padding: 0.55rem;
+      border-radius: 999px;
+      background: var(--popover);
+      border: 1px solid var(--panel-border);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-6px) scale(0.98);
+      transform-origin: top right;
+      transition: opacity 140ms ease, transform 140ms ease;
+    }
+
+    .theme-menu.open .theme-panel {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .theme-choice {
+      position: relative;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--panel-border);
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: var(--button-soft-bg);
+      cursor: pointer;
+      transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+    }
+
+    .theme-choice:hover,
+    .theme-choice:focus-visible,
+    .theme-choice.active {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 0 0 3px var(--ring);
+      outline: 0;
+    }
+
+    .theme-choice::after {
+      content: attr(data-theme-name);
+      position: absolute;
+      bottom: calc(100% + 0.45rem);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--text);
+      color: var(--input-bg);
+      border-radius: 8px;
+      padding: 0.28rem 0.45rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 120ms ease;
+    }
+
+    .theme-choice:hover::after,
+    .theme-choice:focus-visible::after {
+      opacity: 1;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 11px);
+      gap: 3px;
+    }
+
+    .palette-chip {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 0.65rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text);
+      transition: transform 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+    }
+
+    .btn:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px var(--ring);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--accent-text);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-strong);
+      transform: translateY(-1px);
+    }
+
+    .btn-soft {
+      background: var(--button-soft-bg);
+      color: var(--text);
+    }
+
+    .btn-soft:hover {
+      background: var(--button-soft-hover);
+      transform: translateY(-1px);
+    }
+
+    .content {
+      padding: 1.2rem;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      display: grid;
+      gap: 0.8rem;
+      align-content: start;
+    }
+
+    body[data-theme="yoho"] .card,
+    body[data-theme="yoho"] .release-card,
+    body[data-theme="yoho"] .about-detail {
+      box-shadow: inset 0 0 0 1px rgba(255, 244, 204, 0.35);
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .card-unix {
+      grid-column: span 12;
+    }
+
+    .card-tz {
+      grid-column: span 12;
+    }
+
+    .grid {
+      display: grid;
+      gap: 0.7rem;
+      grid-template-columns: repeat(12, 1fr);
+      align-items: end;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.35rem;
+      grid-column: span 12;
+    }
+
+    label {
+      font-size: 0.84rem;
+      color: var(--field-label);
+      font-weight: 600;
+    }
+
+    input,
+    select {
+      width: 100%;
+      border: 1px solid var(--input-border);
+      border-radius: 12px;
+      padding: 0.65rem 0.7rem;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--input-bg);
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      grid-column: span 12;
+    }
+
+    .quick-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      align-items: center;
+    }
+
+    .quick-btn {
+      border-radius: 999px;
+      font-size: 0.85rem;
+      padding: 0.45rem 0.7rem;
+      background: var(--quick-bg);
+      border: 1px solid var(--quick-border);
+    }
+
+    .quick-btn:hover {
+      background: var(--quick-hover);
+      transform: translateY(-1px);
+    }
+
+    .output {
+      border-radius: 14px;
+      background: var(--output-bg);
+      border: 1px solid var(--output-border);
+      padding: 0.95rem;
+      color: var(--output-text);
+      min-height: 60px;
+      font-size: 0.92rem;
+      word-break: break-word;
+    }
+
+    .result-card {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .result-status {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      border-radius: 999px;
+      background: var(--result-status-bg);
+      color: var(--result-status-text);
+      padding: 0.22rem 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .result-grid {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .result-row {
+      display: grid;
+      grid-template-columns: minmax(90px, 150px) 1fr;
+      gap: 0.65rem;
+      align-items: start;
+      border-top: 1px solid var(--result-border);
+      padding-top: 0.45rem;
+    }
+
+    .result-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .result-label {
+      color: var(--result-label);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .result-value {
+      color: var(--result-value);
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      line-height: 1.35;
+    }
+
+    .success {
+      color: var(--ok);
+      font-weight: 600;
+    }
+
+    .error {
+      color: var(--error);
+      font-weight: 600;
+    }
+
+    @media (max-width: 560px) {
+      .result-row {
+        grid-template-columns: 1fr;
+        gap: 0.15rem;
+      }
+    }
+
+    .footer {
+      padding: 0.9rem 1.2rem 1.2rem;
+      color: var(--muted);
+      font-size: 0.83rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    dialog {
+      border: 1px solid var(--panel-border);
+      border-radius: 18px;
+      padding: 1.15rem;
+      width: min(500px, calc(100% - 2rem));
+      box-shadow: var(--shadow);
+      background: var(--dialog-bg);
+      color: var(--text);
+    }
+
+    dialog::backdrop {
+      background: rgba(13, 20, 35, 0.4);
+      backdrop-filter: blur(2px);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .modal-head h3 {
+      margin: 0;
+    }
+
+    .modal-kicker {
+      margin: 0 0 0.15rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .about-meta {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      padding: 0.9rem;
+      border: 1px solid var(--panel-border);
+      border-radius: 14px;
+      background: var(--modal-panel);
+      margin: 0 0 1rem;
+    }
+
+    .version-pill {
+      display: inline-flex;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 0.28rem 0.62rem;
+      background: var(--result-status-bg);
+      color: var(--result-status-text);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+    }
+
+    .copyright-line {
+      margin: 0;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .about-hero {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.9rem;
+      align-items: start;
+      padding: 1rem;
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      background:
+        linear-gradient(135deg, rgba(78, 224, 180, 0.16), rgba(255, 179, 92, 0.08)),
+        var(--modal-panel);
+      margin-bottom: 1rem;
+    }
+
+    .about-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: var(--accent-text);
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .about-hero h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1.25rem;
+    }
+
+    .about-hero .about-text {
+      margin: 0;
+    }
+
+    .about-details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    .about-detail {
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      background: var(--modal-panel);
+      padding: 0.75rem;
+      min-width: 0;
+    }
+
+    .detail-label {
+      display: block;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .detail-value {
+      display: block;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .about-text {
+      color: var(--muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      margin-top: 1.15rem;
+    }
+
+    .changelog-list {
+      margin: 1rem 0 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .changelog-list strong {
+      color: var(--text);
+    }
+
+    .release-stack {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .release-card {
+      border: 1px solid var(--panel-border);
+      border-radius: 14px;
+      background: var(--modal-panel);
+      padding: 0.9rem;
+    }
+
+    .release-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 0.7rem;
+    }
+
+    .release-title {
+      margin: 0;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .release-notes {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    @media (max-width: 560px) {
+      .theme-panel {
+        right: auto;
+        left: 0;
+      }
+
+      .about-hero,
+      .about-details {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .card-unix,
+      .card-tz {
+        grid-column: span 6;
+      }
+
+      .span-6 {
+        grid-column: span 6;
+      }
+
+      .span-4 {
+        grid-column: span 4;
+      }
+
+      .span-3 {
+        grid-column: span 3;
+      }
+    }
+
+    @media (max-width: 899px) {
+      .span-6,
+      .span-4,
+      .span-3 {
+        grid-column: span 12;
+      }
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <div class="bg-shape shape-a" aria-hidden="true">
+    <svg class="globe-linework" viewBox="0 0 200 200">
+      <defs>
+        <clipPath id="globeClipA">
+          <circle cx="100" cy="100" r="96" />
+        </clipPath>
+      </defs>
+      <g clip-path="url(#globeClipA)">
+        <circle class="globe-grid" cx="100" cy="100" r="95" />
+        <ellipse class="globe-grid" cx="100" cy="100" rx="68" ry="95" />
+        <ellipse class="globe-grid" cx="100" cy="100" rx="34" ry="95" />
+        <path class="globe-grid" d="M8 100h184" />
+        <ellipse class="globe-grid" cx="100" cy="100" rx="94" ry="24" />
+        <ellipse class="globe-grid" cx="100" cy="100" rx="94" ry="54" />
+      </g>
+    </svg>
+  </div>
+  <div class="bg-shape shape-b" aria-hidden="true">
+    <svg class="globe-linework" viewBox="0 0 200 200">
+      <defs>
+        <clipPath id="globeClipB">
+          <circle cx="100" cy="100" r="96" />
+        </clipPath>
+      </defs>
+      <g clip-path="url(#globeClipB)">
+        <circle class="globe-grid" cx="100" cy="100" r="95" />
+        <ellipse class="globe-grid" cx="100" cy="100" rx="68" ry="95" />
+        <ellipse class="globe-grid" cx="100" cy="100" rx="34" ry="95" />
+        <path class="globe-grid" d="M8 100h184" />
+        <ellipse class="globe-grid" cx="100" cy="100" rx="94" ry="24" />
+        <ellipse class="globe-grid" cx="100" cy="100" rx="94" ry="54" />
+      </g>
+    </svg>
+  </div>
+
+  <main class="app">
+    <header class="header">
+      <div class="brand">
+        <h1 class="title">Timetrack</h1>
+        <p id="appSubtitle" class="subtitle">Fast timezone conversion with clean local-time output</p>
+      </div>
+      <div class="header-actions">
+        <div id="themeMenu" class="theme-menu">
+          <button id="themeToggle" class="btn btn-soft theme-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+            <span id="themeIcon" class="emoji-icon" aria-hidden="true">🎨</span>
+            Theme
+          </button>
+          <div id="themePanel" class="theme-panel" role="menu" aria-label="Theme picker"></div>
+        </div>
+        <button id="openAbout" class="btn btn-soft btn-icon" type="button">
+          <span id="aboutIcon" class="emoji-icon" aria-hidden="true">ℹ️</span>
+          About
+        </button>
+      </div>
+    </header>
+
+    <section class="content">
+      <article class="card card-unix">
+        <h2>UNIX to Local / Timezone</h2>
+        <p id="unixDescription">Convert UNIX timestamps in seconds or milliseconds.</p>
+
+        <div class="grid">
+          <div class="field span-6">
+            <label for="unixInput">UNIX Timestamp</label>
+            <input id="unixInput" type="text" placeholder="e.g. 1739191200 or 1739191200000" />
+          </div>
+
+          <div class="field span-6">
+            <label for="unixTargetZone">Output Timezone</label>
+            <select id="unixTargetZone"></select>
+          </div>
+
+          <div class="actions">
+            <button id="unixConvert" class="btn btn-primary" type="button">Convert Timestamp</button>
+            <button id="unixNow" class="btn btn-soft" type="button">Use Current UNIX</button>
+          </div>
+        </div>
+
+        <div id="unixOutput" class="output" aria-live="polite">Awaiting input...</div>
+      </article>
+
+      <article class="card card-tz">
+        <h2>Timezone to Timezone</h2>
+        <p id="timezoneDescription">Convert UTC, GMT, or international zones into local or selected target zones.</p>
+
+        <div class="grid">
+          <div class="field span-6">
+            <label for="sourceDateTime">Date & Time</label>
+            <input id="sourceDateTime" type="datetime-local" />
+          </div>
+
+          <div class="field span-6">
+            <label for="sourceZone">From Timezone</label>
+            <select id="sourceZone"></select>
+          </div>
+
+          <div class="field span-6">
+            <label for="targetZone">To Timezone</label>
+            <select id="targetZone"></select>
+          </div>
+
+          <div class="field span-12">
+            <label for="sourceQuickZones">Quick source zones</label>
+            <div id="sourceQuickZones" class="quick-strip" role="group" aria-label="Quick source timezone presets"></div>
+          </div>
+
+          <div class="field span-12">
+            <label for="targetQuickZones">Quick destination zones</label>
+            <div id="targetQuickZones" class="quick-strip" role="group" aria-label="Quick destination timezone presets"></div>
+          </div>
+
+          <div class="field span-6">
+            <label for="zoneCode">Optional Code (UTC/GMT/etc)</label>
+            <input id="zoneCode" type="text" placeholder="e.g. India, Brazil, UTC, GMT, Europe, EST" />
+          </div>
+
+          <div class="actions">
+            <button id="tzConvert" class="btn btn-primary" type="button">Convert Time</button>
+            <button id="tzNow" class="btn btn-soft" type="button">Use Current Local Time</button>
+          </div>
+        </div>
+
+        <div id="tzOutput" class="output" aria-live="polite">Awaiting input...</div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <span id="localZoneLabel"></span>
+      <span>Timetrack Web App</span>
+    </footer>
+  </main>
+
+  <dialog id="aboutModal">
+    <div class="modal-head">
+      <div>
+        <p class="modal-kicker">Timetrack</p>
+        <h3>About</h3>
+      </div>
+      <button id="closeAbout" class="btn btn-soft" type="button">Close</button>
+    </div>
+    <div class="about-hero">
+      <div class="about-mark" aria-hidden="true">TT</div>
+      <div>
+        <p class="modal-kicker">Timezone utility</p>
+        <h3>Fast customer-time conversion</h3>
+        <p id="aboutDescription" class="about-text">
+          Timetrack converts UNIX timestamps and customer-provided time references into local or selected timezones.
+        </p>
+      </div>
+    </div>
+    <div class="about-details">
+      <div class="about-detail">
+        <span class="detail-label">Version</span>
+        <span class="detail-value">1.1.0-alpha</span>
+      </div>
+      <div class="about-detail">
+        <span class="detail-label">Format</span>
+        <span class="detail-value">Single-file HTML</span>
+      </div>
+      <div class="about-detail">
+        <span class="detail-label">Copyright</span>
+        <span class="detail-value">Taylor Bowden</span>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button id="openChangelog" class="btn btn-primary" type="button">Changelog</button>
+    </div>
+  </dialog>
+
+  <dialog id="changelogModal">
+    <div class="modal-head">
+      <div>
+        <p class="modal-kicker">Release notes</p>
+        <h3>Changelog</h3>
+      </div>
+      <button id="closeChangelog" class="btn btn-soft" type="button">Close</button>
+    </div>
+    <div class="about-meta">
+      <span class="version-pill">1.1.0-alpha</span>
+      <p class="copyright-line">Design expansion release</p>
+    </div>
+    <div class="release-stack">
+      <section class="release-card">
+        <div class="release-head">
+          <h4 class="release-title">Design expansion</h4>
+          <span class="version-pill">1.1.0-alpha</span>
+        </div>
+        <ul class="release-notes">
+          <li>Added Daylight back into the theme picker.</li>
+          <li>Refined the corner globes with curved world-map linework.</li>
+          <li>Added Yoho, an easter egg pirate-map theme with wood, sand, water, and tropical island styling.</li>
+          <li>Added Yoho-only pirate copy, pirate header icons, and palm tree branding.</li>
+        </ul>
+      </section>
+      <section class="release-card">
+        <div class="release-head">
+          <h4 class="release-title">Adjustments and theme pass</h4>
+          <span class="version-pill">1.0.2-alpha</span>
+        </div>
+        <ul class="release-notes">
+          <li>Reworked the changelog into card-style release sections.</li>
+          <li>Removed redundant alpha wording from the About metadata.</li>
+          <li>Added Cyber Ember, Signal Grove, and Sky Prism themes.</li>
+        </ul>
+      </section>
+      <section class="release-card">
+        <div class="release-head">
+          <h4 class="release-title">About panel cleanup</h4>
+          <span class="version-pill">1.0.1-alpha</span>
+        </div>
+        <ul class="release-notes">
+          <li>Redesigned the About modal with a branded summary panel.</li>
+          <li>Added matching emoji labels to the Theme and About header buttons.</li>
+        </ul>
+      </section>
+      <section class="release-card">
+        <div class="release-head">
+          <h4 class="release-title">Initial release</h4>
+          <span class="version-pill">1.0.0-alpha</span>
+        </div>
+        <ul class="release-notes">
+          <li>Added UNIX timestamp conversion to local or selected timezones.</li>
+          <li>Added timezone-to-timezone conversion with customer aliases.</li>
+          <li>Added quick source and destination timezone presets.</li>
+        </ul>
+      </section>
+    </div>
+  </dialog>
+
+  <script>
+    const localTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+    const unixInput = document.getElementById("unixInput");
+    const unixTargetZone = document.getElementById("unixTargetZone");
+    const unixOutput = document.getElementById("unixOutput");
+    const sourceDateTime = document.getElementById("sourceDateTime");
+    const sourceZone = document.getElementById("sourceZone");
+    const targetZone = document.getElementById("targetZone");
+    const sourceQuickZones = document.getElementById("sourceQuickZones");
+    const targetQuickZones = document.getElementById("targetQuickZones");
+    const zoneCode = document.getElementById("zoneCode");
+    const tzOutput = document.getElementById("tzOutput");
+
+    const aboutModal = document.getElementById("aboutModal");
+    const openAbout = document.getElementById("openAbout");
+    const closeAbout = document.getElementById("closeAbout");
+    const changelogModal = document.getElementById("changelogModal");
+    const openChangelog = document.getElementById("openChangelog");
+    const closeChangelog = document.getElementById("closeChangelog");
+    const themeMenu = document.getElementById("themeMenu");
+    const themeToggle = document.getElementById("themeToggle");
+    const themePanel = document.getElementById("themePanel");
+    const themeIcon = document.getElementById("themeIcon");
+    const aboutIcon = document.getElementById("aboutIcon");
+    const appSubtitle = document.getElementById("appSubtitle");
+    const unixDescription = document.getElementById("unixDescription");
+    const timezoneDescription = document.getElementById("timezoneDescription");
+    const aboutDescription = document.getElementById("aboutDescription");
+
+    const localLabel = document.getElementById("localZoneLabel");
+    localLabel.textContent = `Your local timezone: ${localTimeZone}`;
+
+    const themeOptions = [
+      {
+        id: "dark",
+        name: "Dark",
+        palette: ["#08111d", "#4ee0b4", "#ffb35c", "#eff7ff"]
+      },
+      {
+        id: "daylight",
+        name: "Daylight",
+        palette: ["#f4f8ff", "#165dff", "#35c89d", "#14223d"]
+      },
+      {
+        id: "cyber-ember",
+        name: "Cyber Ember",
+        palette: ["#050608", "#fa582d", "#fff8f4", "#22110c"]
+      },
+      {
+        id: "signal-grove",
+        name: "Signal Grove",
+        palette: ["#061511", "#41d690", "#8ad9ff", "#effff8"]
+      },
+      {
+        id: "sky-prism",
+        name: "Sky Prism",
+        palette: ["#071020", "#55b9ff", "#7bf4d8", "#eef8ff"]
+      },
+      {
+        id: "yoho",
+        name: "Yoho",
+        palette: ["#e7d29d", "#147f8c", "#8b4f22", "#3d8f5f"]
+      }
+    ];
+
+    const themedCopy = [
+      {
+        element: appSubtitle,
+        normal: "Fast timezone conversion with clean local-time output",
+        yoho: "Chart the hour across every port and tide"
+      },
+      {
+        element: unixDescription,
+        normal: "Convert UNIX timestamps in seconds or milliseconds.",
+        yoho: "Turn old timestamp treasure marks into proper port time."
+      },
+      {
+        element: timezoneDescription,
+        normal: "Convert UTC, GMT, or international zones into local or selected target zones.",
+        yoho: "Translate faraway port calls into yer local harbor time."
+      },
+      {
+        element: aboutDescription,
+        normal: "Timetrack converts UNIX timestamps and customer-provided time references into local or selected timezones.",
+        yoho: "Timetrack charts timestamps and customer time clues across the seas into the harbor timezone ye choose."
+      }
+    ];
+
+    const tzAliases = {
+      UTC: "UTC",
+      GMT: "UTC",
+      Z: "UTC",
+      EST: "America/New_York",
+      EDT: "America/New_York",
+      CST: "America/Chicago",
+      CDT: "America/Chicago",
+      MST: "America/Denver",
+      MDT: "America/Denver",
+      PST: "America/Los_Angeles",
+      PDT: "America/Los_Angeles",
+      CET: "Europe/Paris",
+      CEST: "Europe/Paris",
+      EET: "Europe/Helsinki",
+      EEST: "Europe/Helsinki",
+      IST: "Asia/Kolkata",
+      JST: "Asia/Tokyo",
+      AEST: "Australia/Sydney",
+      AEDT: "Australia/Sydney"
+    };
+
+    const quickZonePresets = [
+      { label: "Local", value: "local" },
+      { label: "India", value: "Asia/Kolkata" },
+      { label: "Brazil", value: "America/Sao_Paulo" },
+      { label: "Europe (London)", value: "Europe/London" },
+      { label: "Europe (Berlin)", value: "Europe/Berlin" },
+      { label: "Europe (Paris)", value: "Europe/Paris" },
+      { label: "US East", value: "America/New_York" },
+      { label: "US Central", value: "America/Chicago" }
+    ];
+
+    const aliasGroups = [
+      { zone: "UTC", terms: ["utc", "gmt", "greenwich", "zulu"] },
+      { zone: "Asia/Kolkata", terms: ["india", "indian", "ist", "kolkata", "delhi", "bombay"] },
+      { zone: "America/Sao_Paulo", terms: ["brazil", "brazilian", "brasil", "sao paulo", "sao-paulo", "brasilia"] },
+      { zone: "Europe/London", terms: ["london", "uk", "british", "england", "britain", "bst", "gmt", "british time"] },
+      { zone: "Europe/Paris", terms: ["europe", "cet", "cest", "paris", "france", "italy", "spanish", "spain", "berlin", "germany"] },
+      { zone: "Europe/Berlin", terms: ["europe berlin", "central europe", "mit", "cest"] },
+      { zone: "America/New_York", terms: ["us east", "eastern time", "new york", "ny", "est", "edt"] },
+      { zone: "America/Chicago", terms: ["us central", "central time", "chicago", "cst", "cdt"] },
+      { zone: "Asia/Tokyo", terms: ["japan", "tokyo", "jst"] },
+      { zone: "Australia/Sydney", terms: ["australia", "sydney", "aest", "aedt"] }
+    ];
+
+    function getSupportedTimeZones() {
+      if (typeof Intl.supportedValuesOf === "function") {
+        return Intl.supportedValuesOf("timeZone");
+      }
+
+      // Basic fallback for older engines.
+      return [
+        "UTC",
+        "America/New_York",
+        "America/Chicago",
+        "America/Denver",
+        "America/Los_Angeles",
+        "Europe/London",
+        "Europe/Paris",
+        "Europe/Berlin",
+        "Asia/Tokyo",
+        "Asia/Kolkata",
+        "Australia/Sydney"
+      ];
+    }
+
+    function buildTimezoneSelect(selectEl, includeLocal = true) {
+      const zones = getSupportedTimeZones();
+      const frag = document.createDocumentFragment();
+      const commonOptions = quickZonePresets.filter((preset) => preset.value !== "local");
+
+      if (includeLocal) {
+        frag.appendChild(new Option(`Local (${localTimeZone})`, "local"));
+      }
+
+      if (!zones.includes("UTC")) {
+        frag.appendChild(new Option("UTC", "UTC"));
+      }
+
+      frag.appendChild(new Option("GMT", "UTC"));
+
+      const commonGroup = document.createElement("optgroup");
+      commonGroup.label = "Common";
+
+      commonOptions.forEach((preset) => {
+        commonGroup.appendChild(new Option(preset.label, preset.value));
+      });
+
+      if (commonOptions.length > 0) {
+        frag.appendChild(commonGroup);
+      }
+
+
+      zones
+        .slice()
+        .sort((a, b) => a.localeCompare(b))
+        .forEach((zone) => {
+          const label = zone.replace("_", " ");
+          frag.appendChild(new Option(label, zone));
+        });
+
+      selectEl.innerHTML = "";
+      selectEl.appendChild(frag);
+    }
+
+    function resolveZone(value, codeFieldValue) {
+      const aliasRaw = (codeFieldValue || "").trim();
+      const alias = resolveAliasZone(aliasRaw);
+      if (alias) {
+        return alias;
+      }
+
+      if (aliasRaw) {
+        const codeUpper = aliasRaw.toUpperCase();
+        if (tzAliases[codeUpper]) {
+          return tzAliases[codeUpper];
+        }
+      }
+
+      if (aliasRaw) {
+        return aliasRaw;
+      }
+
+      if (!value || value === "local") {
+        return localTimeZone;
+      }
+
+      return value;
+    }
+
+    function resolveAliasZone(input) {
+      if (!input) return "";
+
+      const normalized = input.trim().toLowerCase();
+      const compact = normalized.replace(/[^a-z]/g, "");
+      if (tzAliases[normalized.toUpperCase()]) {
+        return tzAliases[normalized.toUpperCase()];
+      }
+      if (tzAliases[compact.toUpperCase()]) {
+        return tzAliases[compact.toUpperCase()];
+      }
+
+      for (const alias of aliasGroups) {
+        for (const term of alias.terms) {
+          if (normalized.includes(term) || compact.includes(term.replace(/\s/g, ""))) {
+            return alias.zone;
+          }
+        }
+      }
+
+      return "";
+    }
+
+    function wireQuickButtons(container, onPick) {
+      if (!container) return;
+
+      quickZonePresets.forEach((preset) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "btn quick-btn";
+        btn.textContent = preset.label;
+        btn.dataset.zone = preset.value;
+        btn.addEventListener("click", () => onPick(preset.value));
+        container.appendChild(btn);
+      });
+    }
+
+    function applyZoneSelectValue(selectEl, zoneValue) {
+      selectEl.value = zoneValue;
+      if (selectEl.value !== zoneValue && zoneValue === "local") {
+        selectEl.value = "local";
+      }
+    }
+
+    function getStoredTheme() {
+      try {
+        return localStorage.getItem("timetrack-theme") || "dark";
+      } catch {
+        return "dark";
+      }
+    }
+
+    function setStoredTheme(themeId) {
+      try {
+        localStorage.setItem("timetrack-theme", themeId);
+      } catch {
+        // Private browsing or local file restrictions can disable storage.
+      }
+    }
+
+    function closeThemeMenu() {
+      themeMenu.classList.remove("open");
+      themeToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function applyTheme(themeId) {
+      const theme = themeOptions.find((item) => item.id === themeId) || themeOptions[0];
+      document.body.dataset.theme = theme.id;
+      themeToggle.title = `Theme: ${theme.name}`;
+      themeIcon.textContent = theme.id === "yoho" ? "🏴‍☠️" : "🎨";
+      aboutIcon.textContent = theme.id === "yoho" ? "🗺️" : "ℹ️";
+      themedCopy.forEach((item) => {
+        item.element.textContent = theme.id === "yoho" ? item.yoho : item.normal;
+      });
+      setStoredTheme(theme.id);
+
+      document.querySelectorAll(".theme-choice").forEach((button) => {
+        button.classList.toggle("active", button.dataset.themeId === theme.id);
+      });
+    }
+
+    function buildThemePicker() {
+      themePanel.innerHTML = "";
+
+      themeOptions.forEach((theme) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "theme-choice";
+        button.dataset.themeId = theme.id;
+        button.dataset.themeName = theme.name;
+        button.title = theme.name;
+        button.setAttribute("role", "menuitem");
+        button.setAttribute("aria-label", `${theme.name} theme`);
+
+        const palette = document.createElement("span");
+        palette.className = "palette-grid";
+        palette.setAttribute("aria-hidden", "true");
+
+        theme.palette.forEach((color) => {
+          const chip = document.createElement("span");
+          chip.className = "palette-chip";
+          chip.style.background = color;
+          palette.appendChild(chip);
+        });
+
+        button.appendChild(palette);
+        button.addEventListener("click", () => {
+          applyTheme(theme.id);
+          closeThemeMenu();
+        });
+        themePanel.appendChild(button);
+      });
+    }
+
+    function wireLightDismiss(dialog) {
+      dialog.addEventListener("click", (event) => {
+        const bounds = dialog.getBoundingClientRect();
+        const inDialog =
+          event.clientX >= bounds.left &&
+          event.clientX <= bounds.right &&
+          event.clientY >= bounds.top &&
+          event.clientY <= bounds.bottom;
+
+        if (!inDialog) {
+          dialog.close();
+        }
+      });
+    }
+
+    function isValidTimeZone(timeZone) {
+      try {
+        new Intl.DateTimeFormat("en-US", { timeZone }).format(new Date());
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
+    function escapeHTML(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function renderResult(rows) {
+      const body = rows
+        .map(({ label, value }) => `
+          <div class="result-row">
+            <div class="result-label">${escapeHTML(label)}</div>
+            <div class="result-value">${escapeHTML(value)}</div>
+          </div>
+        `)
+        .join("");
+
+      return `
+        <div class="result-card">
+          <span class="result-status">Converted</span>
+          <div class="result-grid">${body}</div>
+        </div>
+      `;
+    }
+
+    function formatInZone(date, zone) {
+      const fmt = new Intl.DateTimeFormat("en-US", {
+        timeZone: zone,
+        year: "numeric",
+        month: "short",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+        timeZoneName: "short"
+      });
+
+      return fmt.format(date);
+    }
+
+    function getOffsetMsForZone(date, zone) {
+      const dtf = new Intl.DateTimeFormat("en-US", {
+        timeZone: zone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      });
+
+      const parts = dtf.formatToParts(date);
+      const map = Object.fromEntries(parts.map((p) => [p.type, p.value]));
+      const asUTC = Date.UTC(
+        Number(map.year),
+        Number(map.month) - 1,
+        Number(map.day),
+        Number(map.hour),
+        Number(map.minute),
+        Number(map.second)
+      );
+
+      return asUTC - date.getTime();
+    }
+
+    function zonedLocalToUtc(dateTimeLocalStr, sourceTimeZone) {
+      const [datePart, timePart] = dateTimeLocalStr.split("T");
+      if (!datePart || !timePart) {
+        throw new Error("Please enter a valid date and time.");
+      }
+
+      const [year, month, day] = datePart.split("-").map(Number);
+      const [hour, minute] = timePart.split(":").map(Number);
+
+      if ([year, month, day, hour, minute].some((n) => Number.isNaN(n))) {
+        throw new Error("Invalid date/time format.");
+      }
+
+      // Initial UTC guess based on the provided wall clock values.
+      let utcMs = Date.UTC(year, month - 1, day, hour, minute, 0);
+      let offset = getOffsetMsForZone(new Date(utcMs), sourceTimeZone);
+      utcMs -= offset;
+
+      // One extra pass helps around DST transitions.
+      const offset2 = getOffsetMsForZone(new Date(utcMs), sourceTimeZone);
+      if (offset2 !== offset) {
+        utcMs -= (offset2 - offset);
+      }
+
+      return new Date(utcMs);
+    }
+
+    function convertUnix() {
+      const raw = unixInput.value.trim();
+      if (!raw) {
+        unixOutput.innerHTML = `<span class="error">Enter a UNIX timestamp first.</span>`;
+        return;
+      }
+
+      if (!/^-?\d+$/.test(raw)) {
+        unixOutput.innerHTML = `<span class="error">Timestamp must be an integer.</span>`;
+        return;
+      }
+
+      const numeric = Number(raw);
+      const ms = Math.abs(numeric) < 1e12 ? numeric * 1000 : numeric;
+      const date = new Date(ms);
+
+      if (Number.isNaN(date.getTime())) {
+        unixOutput.innerHTML = `<span class="error">Could not parse the timestamp.</span>`;
+        return;
+      }
+
+      const zone = resolveZone(unixTargetZone.value, "");
+      if (!isValidTimeZone(zone)) {
+        unixOutput.innerHTML = `<span class="error">Invalid output timezone.</span>`;
+        return;
+      }
+
+      const local = formatInZone(date, localTimeZone);
+      const target = formatInZone(date, zone);
+      unixOutput.innerHTML = renderResult([
+        { label: "UNIX ms", value: ms },
+        { label: "Local", value: `${localTimeZone}: ${local}` },
+        { label: "Target", value: `${zone}: ${target}` }
+      ]);
+    }
+
+    function convertTimezone() {
+      const dt = sourceDateTime.value;
+      if (!dt) {
+        tzOutput.innerHTML = `<span class="error">Pick a date/time to convert.</span>`;
+        return;
+      }
+
+      const sourceResolved = resolveZone(sourceZone.value, zoneCode.value);
+      const targetResolved = resolveZone(targetZone.value, "");
+
+      if (!isValidTimeZone(sourceResolved)) {
+        tzOutput.innerHTML = `<span class="error">Source timezone is not valid: ${sourceResolved}</span>`;
+        return;
+      }
+
+      if (!isValidTimeZone(targetResolved)) {
+        tzOutput.innerHTML = `<span class="error">Target timezone is not valid: ${targetResolved}</span>`;
+        return;
+      }
+
+      try {
+        const utcDate = zonedLocalToUtc(dt, sourceResolved);
+        const inSource = formatInZone(utcDate, sourceResolved);
+        const inTarget = formatInZone(utcDate, targetResolved);
+        const inLocal = formatInZone(utcDate, localTimeZone);
+
+        tzOutput.innerHTML = renderResult([
+          { label: "From", value: `${sourceResolved}: ${inSource}` },
+          { label: "To", value: `${targetResolved}: ${inTarget}` },
+          { label: "Local", value: `${localTimeZone}: ${inLocal}` },
+          { label: "UNIX", value: Math.floor(utcDate.getTime() / 1000) }
+        ]);
+      } catch (err) {
+        tzOutput.innerHTML = `<span class="error">${err.message || "Conversion failed."}</span>`;
+      }
+    }
+
+    function setNow() {
+      const now = new Date();
+      const pad = (n) => String(n).padStart(2, "0");
+      const localStr = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
+      sourceDateTime.value = localStr;
+      sourceZone.value = "local";
+    }
+
+    function setUnixNow() {
+      unixInput.value = String(Math.floor(Date.now() / 1000));
+      convertUnix();
+    }
+
+    function init() {
+      buildThemePicker();
+      applyTheme(getStoredTheme());
+      buildTimezoneSelect(unixTargetZone);
+      buildTimezoneSelect(sourceZone);
+      buildTimezoneSelect(targetZone);
+      wireQuickButtons(sourceQuickZones, (zone) => {
+        zoneCode.value = "";
+        applyZoneSelectValue(sourceZone, zone);
+      });
+      wireQuickButtons(targetQuickZones, (zone) => {
+        applyZoneSelectValue(targetZone, zone);
+      });
+
+      unixTargetZone.value = "local";
+      sourceZone.value = "UTC";
+      targetZone.value = "local";
+      setNow();
+
+      document.getElementById("unixConvert").addEventListener("click", convertUnix);
+      document.getElementById("unixNow").addEventListener("click", setUnixNow);
+      document.getElementById("tzConvert").addEventListener("click", convertTimezone);
+      document.getElementById("tzNow").addEventListener("click", setNow);
+
+      unixInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          convertUnix();
+        }
+      });
+
+      sourceDateTime.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          convertTimezone();
+        }
+      });
+
+      openAbout.addEventListener("click", () => aboutModal.showModal());
+      closeAbout.addEventListener("click", () => aboutModal.close());
+      openChangelog.addEventListener("click", () => {
+        aboutModal.close();
+        changelogModal.showModal();
+      });
+      closeChangelog.addEventListener("click", () => changelogModal.close());
+
+      themeToggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const nextOpen = !themeMenu.classList.contains("open");
+        themeMenu.classList.toggle("open", nextOpen);
+        themeToggle.setAttribute("aria-expanded", String(nextOpen));
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!themeMenu.contains(event.target)) {
+          closeThemeMenu();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeThemeMenu();
+        }
+      });
+
+      wireLightDismiss(aboutModal);
+      wireLightDismiss(changelogModal);
+    }
+
+    init();
+  </script>
+</body>
+</html>

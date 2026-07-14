@@ -2420,7 +2420,7 @@
     <div class="about-details">
       <div class="about-detail">
         <span class="detail-label">Version</span>
-        <span class="detail-value">1.3.1-alpha</span>
+        <span class="detail-value">1.3.2-alpha</span>
       </div>
       <div class="about-detail">
         <span id="formatLabel" class="detail-label">Format</span>
@@ -2445,10 +2445,20 @@
       <button id="closeChangelog" class="btn btn-soft" type="button">Close</button>
     </div>
     <div class="about-meta">
-      <span class="version-pill">1.3.1-alpha</span>
-      <p class="copyright-line">Yoho beach polish</p>
+      <span class="version-pill">1.3.2-alpha</span>
+      <p class="copyright-line">Historical port names</p>
     </div>
     <div class="release-stack">
+      <section class="release-card">
+        <div class="release-head">
+          <h4 class="release-title">Historical port names</h4>
+          <span class="version-pill">1.3.2-alpha</span>
+        </div>
+        <ul class="release-notes">
+          <li>Renamed Yoho's quick zones with circa-1700 geographic names from the Golden Age of Piracy.</li>
+          <li>Added modern-name tooltips and accessible labels while preserving the original timezone mappings.</li>
+        </ul>
+      </section>
       <section class="release-card">
         <div class="release-head">
           <h4 class="release-title">Yoho beach polish</h4>
@@ -2789,14 +2799,14 @@
     };
 
     const quickZonePresets = [
-      { label: "Local", value: "local" },
-      { label: "India", value: "Asia/Kolkata" },
-      { label: "Brazil", value: "America/Sao_Paulo" },
-      { label: "Europe (London)", value: "Europe/London" },
-      { label: "Europe (Berlin)", value: "Europe/Berlin" },
-      { label: "Europe (Paris)", value: "Europe/Paris" },
-      { label: "US East", value: "America/New_York" },
-      { label: "US Central", value: "America/Chicago" }
+      { label: "Local", yohoLabel: "Home Port", value: "local" },
+      { label: "India", yohoLabel: "Mughal Hindustan", value: "Asia/Kolkata" },
+      { label: "Brazil", yohoLabel: "Estado do Brasil", value: "America/Sao_Paulo" },
+      { label: "Europe (London)", yohoLabel: "London, England", value: "Europe/London" },
+      { label: "Europe (Berlin)", yohoLabel: "Berlin, Prussia", value: "Europe/Berlin" },
+      { label: "Europe (Paris)", yohoLabel: "Paris, Kingdom of France", value: "Europe/Paris" },
+      { label: "US East", yohoLabel: "New York Colony", value: "America/New_York" },
+      { label: "US Central", yohoLabel: "Pays d'en Haut", value: "America/Chicago" }
     ];
 
     const aliasGroups = [
@@ -2927,10 +2937,23 @@
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "btn quick-btn";
-        btn.textContent = preset.label;
         btn.dataset.zone = preset.value;
+        btn.dataset.modernLabel = preset.label;
+        btn.dataset.yohoLabel = preset.yohoLabel;
         btn.addEventListener("click", () => onPick(preset.value));
         container.appendChild(btn);
+      });
+    }
+
+    function updateQuickZoneLabels(isYoho) {
+      document.querySelectorAll(".quick-btn").forEach((button) => {
+        const visibleLabel = isYoho ? button.dataset.yohoLabel : button.dataset.modernLabel;
+        button.textContent = visibleLabel;
+        button.title = isYoho ? `Modern chart: ${button.dataset.modernLabel}` : button.dataset.modernLabel;
+        button.setAttribute(
+          "aria-label",
+          isYoho ? `${visibleLabel}; modern timezone ${button.dataset.modernLabel}` : visibleLabel
+        );
       });
     }
 
@@ -2980,6 +3003,7 @@
       themedPlaceholders.forEach((item) => {
         item.element.placeholder = isYoho ? item.yoho : item.normal;
       });
+      updateQuickZoneLabels(isYoho);
       localLabel.textContent = isYoho
         ? `Yer home port timezone: ${localTimeZone}`
         : `Your local timezone: ${localTimeZone}`;
@@ -3244,6 +3268,7 @@
       wireQuickButtons(targetQuickZones, (zone) => {
         applyZoneSelectValue(targetZone, zone);
       });
+      updateQuickZoneLabels(document.body.dataset.theme === "yoho");
 
       unixTargetZone.value = "local";
       sourceZone.value = "UTC";

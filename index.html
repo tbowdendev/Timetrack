@@ -1431,9 +1431,812 @@
         padding: 14px;
       }
     }
+
+    /* Yoho illustrated island pass */
+    .yoho-scene {
+      display: none;
+    }
+
+    body[data-theme="yoho"] {
+      --panel-border: rgba(70, 35, 14, 0.72);
+      --card: #f4dfaa;
+      --text: #33200f;
+      --muted: #72552f;
+      --accent: #087d80;
+      --accent-strong: #075e64;
+      --accent-text: #fff5cf;
+      --field-label: #68401e;
+      --input-bg: rgba(255, 245, 207, 0.88);
+      --input-border: rgba(117, 72, 31, 0.58);
+      --button-soft-bg: rgba(87, 47, 21, 0.1);
+      --button-soft-hover: rgba(87, 47, 21, 0.18);
+      --quick-bg: rgba(158, 108, 49, 0.12);
+      --quick-border: rgba(120, 77, 31, 0.36);
+      --quick-hover: rgba(8, 125, 128, 0.15);
+      --output-bg: linear-gradient(145deg, rgba(255, 240, 194, 0.82), rgba(232, 202, 139, 0.74));
+      --output-border: rgba(112, 68, 28, 0.5);
+      --output-text: #36220f;
+      --result-border: rgba(111, 73, 35, 0.22);
+      --result-label: #806039;
+      --result-value: #2f1d0d;
+      --result-status-bg: rgba(8, 125, 128, 0.14);
+      --result-status-text: #075e64;
+      --dialog-bg: #f2d99c;
+      --modal-panel: rgba(255, 241, 201, 0.56);
+      --popover: rgba(244, 223, 170, 0.98);
+      position: relative;
+      overflow-x: hidden;
+      padding: clamp(18px, 3vw, 42px) clamp(14px, 5vw, 80px) 230px;
+      background: #83dbe5;
+      background-size: auto;
+    }
+
+    body[data-theme="yoho"] .yoho-scene {
+      position: fixed;
+      z-index: 0;
+      inset: 0;
+      display: block;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 79% 15%, rgba(255, 247, 176, 0.7) 0 5.5%, transparent 5.8%),
+        linear-gradient(180deg,
+          #55c4dd 0%,
+          #a8e4e5 42%,
+          #e6e7bb 49%,
+          #13889a 49.2%,
+          #08758b 59%,
+          #31a8ad 69%,
+          #8bd0bc 74%,
+          #f0d394 74.3%,
+          #ddb66f 100%);
+    }
+
+    body[data-theme="yoho"] .yoho-scene::before {
+      content: "";
+      position: absolute;
+      z-index: 2;
+      left: -5%;
+      right: -5%;
+      bottom: 22%;
+      height: 14%;
+      opacity: 0.9;
+      background:
+        radial-gradient(ellipse at 50% 115%, transparent 0 29px, rgba(255, 251, 219, 0.88) 30px 33px, transparent 34px 48px);
+      background-size: 92px 62px;
+      animation: yoho-waves 14s linear infinite;
+    }
+
+    body[data-theme="yoho"] .yoho-scene::after {
+      content: "";
+      position: absolute;
+      z-index: 3;
+      inset: 74% 0 0;
+      opacity: 0.3;
+      background:
+        radial-gradient(circle at 8% 72%, #936d36 0 2px, transparent 2.5px),
+        radial-gradient(circle at 23% 30%, #a97d3f 0 1px, transparent 1.7px),
+        radial-gradient(circle at 68% 62%, #9f753c 0 1.5px, transparent 2px),
+        radial-gradient(circle at 88% 22%, #8e6733 0 1px, transparent 1.6px);
+      background-size: 170px 120px, 130px 110px, 190px 150px, 150px 130px;
+    }
+
+    .yoho-sun {
+      position: absolute;
+      z-index: 1;
+      top: 8%;
+      right: 14%;
+      width: clamp(74px, 8vw, 126px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #f6cf62;
+      box-shadow: 0 0 0 16px rgba(255, 231, 129, 0.2), 0 0 70px rgba(255, 232, 138, 0.55);
+    }
+
+    .yoho-cloud {
+      position: absolute;
+      z-index: 2;
+      width: 170px;
+      height: 36px;
+      border-radius: 999px;
+      background: rgba(255, 251, 218, 0.82);
+      box-shadow: 0 8px 0 rgba(31, 116, 129, 0.08);
+    }
+
+    .yoho-cloud::before,
+    .yoho-cloud::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      border-radius: 50%;
+      background: inherit;
+    }
+
+    .yoho-cloud::before {
+      left: 28px;
+      width: 68px;
+      height: 68px;
+    }
+
+    .yoho-cloud::after {
+      right: 26px;
+      width: 84px;
+      height: 84px;
+    }
+
+    .yoho-cloud-a {
+      top: 13%;
+      left: 8%;
+      transform: scale(0.72);
+      opacity: 0.82;
+    }
+
+    .yoho-cloud-b {
+      top: 26%;
+      right: 4%;
+      transform: scale(0.48);
+      opacity: 0.62;
+    }
+
+    .yoho-island {
+      position: absolute;
+      z-index: 1;
+      left: 6%;
+      bottom: 48.5%;
+      width: min(430px, 34vw);
+      height: 56px;
+      border-radius: 50% 50% 18% 24%;
+      background: #cfac64;
+      box-shadow: inset 0 -12px 0 rgba(124, 79, 38, 0.18);
+    }
+
+    .yoho-island::before {
+      content: "";
+      position: absolute;
+      left: 9%;
+      right: 7%;
+      bottom: 32px;
+      height: 66px;
+      background:
+        radial-gradient(ellipse at 10% 100%, #256d51 0 20%, transparent 21%),
+        radial-gradient(ellipse at 24% 100%, #287b58 0 27%, transparent 28%),
+        radial-gradient(ellipse at 42% 100%, #1f664c 0 31%, transparent 32%),
+        radial-gradient(ellipse at 62% 100%, #2c805a 0 28%, transparent 29%),
+        radial-gradient(ellipse at 81% 100%, #1e6349 0 25%, transparent 26%),
+        radial-gradient(ellipse at 96% 100%, #317d56 0 20%, transparent 21%);
+    }
+
+    .yoho-birds {
+      position: absolute;
+      z-index: 2;
+      top: 14%;
+      left: 29%;
+      width: 150px;
+      height: 60px;
+    }
+
+    .yoho-birds i,
+    .yoho-birds i::after {
+      position: absolute;
+      width: 24px;
+      height: 12px;
+      border-top: 3px solid rgba(35, 91, 99, 0.72);
+      border-radius: 50%;
+    }
+
+    .yoho-birds i::after {
+      content: "";
+      left: 20px;
+      top: -3px;
+    }
+
+    .yoho-birds i:nth-child(1) { left: 0; top: 28px; transform: rotate(8deg); }
+    .yoho-birds i:nth-child(2) { left: 62px; top: 0; transform: scale(0.72) rotate(-5deg); }
+    .yoho-birds i:nth-child(3) { right: 0; top: 38px; transform: scale(0.55) rotate(12deg); }
+
+    .yoho-ship {
+      position: absolute;
+      z-index: 2;
+      right: 9%;
+      bottom: 45.5%;
+      width: 118px;
+      height: 116px;
+      animation: yoho-bob 4.4s ease-in-out infinite;
+    }
+
+    .yoho-ship::before {
+      content: "";
+      position: absolute;
+      left: 16px;
+      bottom: 2px;
+      width: 96px;
+      height: 27px;
+      clip-path: polygon(0 0, 100% 0, 78% 100%, 18% 100%);
+      background: linear-gradient(180deg, #71401e, #3f2515);
+      box-shadow: inset 0 5px rgba(224, 160, 72, 0.22);
+    }
+
+    .yoho-mast {
+      position: absolute;
+      left: 58px;
+      bottom: 22px;
+      width: 5px;
+      height: 93px;
+      border-radius: 3px;
+      background: #4f2d18;
+    }
+
+    .yoho-sail {
+      position: absolute;
+      left: 63px;
+      bottom: 32px;
+      width: 52px;
+      height: 68px;
+      clip-path: polygon(0 0, 100% 100%, 0 84%);
+      background: linear-gradient(135deg, #fff2bf, #d6b46f);
+      box-shadow: inset 8px 0 rgba(126, 76, 31, 0.08);
+    }
+
+    .yoho-sail-small {
+      left: 14px;
+      bottom: 35px;
+      width: 41px;
+      height: 54px;
+      transform: scaleX(-1);
+      opacity: 0.92;
+    }
+
+    .yoho-flag {
+      position: absolute;
+      z-index: 3;
+      top: 5%;
+      right: 4.5%;
+      width: 150px;
+      height: 285px;
+    }
+
+    .yoho-flag::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      top: 0;
+      width: 7px;
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #4c2a17, #a36534, #4b2917);
+      box-shadow: 4px 0 7px rgba(47, 24, 12, 0.2);
+    }
+
+    .yoho-flag-cloth {
+      position: absolute;
+      left: 18px;
+      top: 18px;
+      width: 126px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+      color: #f6e5ad;
+      font-family: Georgia, serif;
+      font-size: 2.45rem;
+      line-height: 1;
+      text-shadow: 0 2px #111;
+      clip-path: polygon(0 0, 100% 7%, 86% 50%, 100% 93%, 0 100%);
+      background:
+        radial-gradient(circle at 65% 34%, rgba(255,255,255,0.05) 0 7%, transparent 8%),
+        linear-gradient(150deg, #252723, #090b0b 68%);
+      transform-origin: 0 50%;
+      animation: yoho-flag 3.2s ease-in-out infinite;
+    }
+
+    .yoho-chest {
+      position: absolute;
+      z-index: 6;
+      right: 12%;
+      bottom: 5.5%;
+      width: 126px;
+      height: 68px;
+      border: 5px solid #543018;
+      border-radius: 5px 5px 12px 12px;
+      transform: rotate(-4deg);
+      background:
+        linear-gradient(90deg, transparent 43%, #d19b3f 43% 57%, transparent 57%),
+        repeating-linear-gradient(90deg, #925026 0 19px, #b9692f 19px 38px);
+      box-shadow: inset 0 9px rgba(255, 183, 72, 0.12), 0 11px 0 rgba(96, 63, 28, 0.16);
+    }
+
+    .yoho-chest::before {
+      content: "";
+      position: absolute;
+      left: -5px;
+      right: -5px;
+      top: -42px;
+      height: 42px;
+      border: 5px solid #543018;
+      border-bottom-width: 7px;
+      border-radius: 55px 55px 3px 3px;
+      background:
+        repeating-linear-gradient(90deg, #a75c28 0 22px, #c47835 22px 43px);
+      transform-origin: 10% 100%;
+      transform: rotate(-8deg);
+    }
+
+    .yoho-chest::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 13px;
+      top: -24px;
+      width: 96px;
+      height: 28px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 12% 64%, #ffe36c 0 4px, #b87a24 5px 7px, transparent 8px),
+        radial-gradient(circle at 32% 35%, #ffe36c 0 5px, #b87a24 6px 8px, transparent 9px),
+        radial-gradient(circle at 55% 70%, #ffe36c 0 4px, #b87a24 5px 7px, transparent 8px),
+        radial-gradient(circle at 78% 31%, #ffe36c 0 5px, #b87a24 6px 8px, transparent 9px),
+        #d79a32;
+      box-shadow: 0 0 14px rgba(255, 218, 77, 0.72);
+    }
+
+    .yoho-x {
+      position: absolute;
+      z-index: 4;
+      left: 26%;
+      bottom: 7%;
+      color: rgba(133, 45, 27, 0.7);
+      font: 900 clamp(54px, 6vw, 94px)/1 Georgia, serif;
+      transform: rotate(-11deg);
+      text-shadow: 2px 2px rgba(255, 224, 153, 0.3);
+    }
+
+    .yoho-crab {
+      position: absolute;
+      z-index: 7;
+      left: 15%;
+      bottom: 4.5%;
+      font-size: 2.2rem;
+      filter: drop-shadow(0 5px 2px rgba(89, 53, 22, 0.18));
+      animation: yoho-scuttle 8s ease-in-out infinite;
+    }
+
+    .yoho-palm {
+      position: absolute;
+      z-index: 4;
+      bottom: -24px;
+      width: 250px;
+      height: 410px;
+      transform-origin: 50% 100%;
+      filter: drop-shadow(0 14px 8px rgba(67, 43, 20, 0.2));
+    }
+
+    .yoho-palm-left {
+      left: clamp(-72px, 1vw, 24px);
+      transform: rotate(-5deg);
+    }
+
+    .yoho-palm-right {
+      right: clamp(-92px, -1vw, -12px);
+      transform: scale(0.82) rotate(7deg);
+      opacity: 0.94;
+    }
+
+    .yoho-trunk {
+      position: absolute;
+      left: 105px;
+      bottom: 0;
+      width: 36px;
+      height: 315px;
+      border-radius: 50% 50% 18% 18%;
+      transform: rotate(7deg);
+      transform-origin: 50% 100%;
+      clip-path: polygon(31% 0, 70% 0, 100% 100%, 0 100%);
+      background:
+        repeating-linear-gradient(180deg, transparent 0 22px, rgba(79, 43, 22, 0.3) 23px 27px),
+        linear-gradient(90deg, #7b4524, #c17d3d 45%, #8b4e28 80%);
+    }
+
+    .yoho-crown {
+      position: absolute;
+      z-index: 1;
+      top: 60px;
+      left: 125px;
+    }
+
+    .yoho-frond {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 142px;
+      height: 46px;
+      transform-origin: 0 50%;
+      clip-path: polygon(0 43%, 21% 17%, 18% 38%, 43% 5%, 39% 37%, 68% 0, 61% 38%, 100% 21%, 68% 52%, 96% 78%, 59% 61%, 76% 100%, 37% 66%, 42% 94%, 16% 61%, 19% 82%, 0 57%);
+      background: linear-gradient(180deg, #2c8a58, #14533c);
+    }
+
+    .yoho-frond:nth-child(1) { transform: rotate(-83deg) scale(0.9); }
+    .yoho-frond:nth-child(2) { transform: rotate(-52deg) scale(1.05); }
+    .yoho-frond:nth-child(3) { transform: rotate(-20deg) scale(1.08); }
+    .yoho-frond:nth-child(4) { transform: rotate(13deg) scale(1); }
+    .yoho-frond:nth-child(5) { transform: rotate(48deg) scale(0.92); }
+    .yoho-frond:nth-child(6) { transform: rotate(92deg) scale(0.78); }
+    .yoho-frond:nth-child(7) { transform: rotate(145deg) scale(0.86); }
+    .yoho-frond:nth-child(8) { transform: rotate(197deg) scale(0.82); }
+
+    body[data-theme="yoho"] .bg-shape {
+      display: none;
+    }
+
+    body[data-theme="yoho"] .app {
+      position: relative;
+      z-index: 5;
+      width: min(1180px, 100%);
+      overflow: visible;
+      border: 8px solid #5a301a;
+      border-radius: 12px;
+      backdrop-filter: none;
+      background:
+        radial-gradient(ellipse at 8% 18%, rgba(62, 28, 12, 0.62) 0 6px, transparent 7px),
+        radial-gradient(ellipse at 91% 72%, rgba(70, 32, 13, 0.48) 0 9px, transparent 10px),
+        repeating-linear-gradient(0deg, transparent 0 128px, rgba(64, 30, 14, 0.42) 129px 132px, rgba(242, 181, 93, 0.2) 133px 135px),
+        repeating-linear-gradient(92deg, rgba(255, 217, 139, 0.05) 0 2px, rgba(74, 36, 17, 0.07) 3px 6px, transparent 7px 15px),
+        linear-gradient(100deg, #81451f, #b86d31 18%, #915027 37%, #bd7738 58%, #8b4822 79%, #ad632c);
+      box-shadow:
+        inset 0 0 0 2px rgba(238, 176, 87, 0.48),
+        inset 0 0 32px rgba(53, 24, 10, 0.38),
+        0 26px 0 -15px rgba(62, 31, 14, 0.42),
+        0 34px 70px rgba(47, 47, 25, 0.32);
+    }
+
+    body[data-theme="yoho"] .app::before {
+      content: "";
+      position: absolute;
+      z-index: 7;
+      inset: -17px;
+      border: 6px dashed #d3aa64;
+      border-radius: 21px;
+      pointer-events: none;
+      filter: drop-shadow(0 2px 0 #69401f);
+      box-shadow: inset 0 0 0 2px rgba(85, 48, 21, 0.24), 0 0 0 2px rgba(85, 48, 21, 0.18);
+    }
+
+    body[data-theme="yoho"] .app::after {
+      content: "";
+      position: absolute;
+      z-index: 8;
+      inset: 10px;
+      border-radius: 5px;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 0 0, #2c2119 0 3px, #93816a 3.5px 5px, transparent 5.5px),
+        radial-gradient(circle at 100% 0, #2c2119 0 3px, #93816a 3.5px 5px, transparent 5.5px),
+        radial-gradient(circle at 0 100%, #2c2119 0 3px, #93816a 3.5px 5px, transparent 5.5px),
+        radial-gradient(circle at 100% 100%, #2c2119 0 3px, #93816a 3.5px 5px, transparent 5.5px);
+    }
+
+    body[data-theme="yoho"] .header,
+    body[data-theme="yoho"] .content,
+    body[data-theme="yoho"] .footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    body[data-theme="yoho"] .header {
+      padding: 26px 30px 22px;
+      border-bottom: 5px solid rgba(74, 34, 16, 0.72);
+      background: linear-gradient(180deg, rgba(255, 199, 109, 0.15), rgba(54, 24, 11, 0.12));
+      box-shadow: 0 2px 0 rgba(237, 174, 83, 0.35);
+    }
+
+    body[data-theme="yoho"] .title {
+      color: #fff0b7;
+      font-size: clamp(2rem, 4vw, 3rem);
+      text-shadow: 0 2px 0 #553018, 0 4px 10px rgba(43, 21, 9, 0.36);
+    }
+
+    body[data-theme="yoho"] .subtitle {
+      color: #f4dca2;
+      font-weight: 650;
+      text-shadow: 0 1px rgba(54, 28, 14, 0.7);
+    }
+
+    body[data-theme="yoho"] .brand::before {
+      display: block;
+      content: "";
+      left: -12px;
+      top: -16px;
+      width: 76px;
+      height: 76px;
+      border: 2px dashed rgba(255, 232, 168, 0.18);
+      border-radius: 50%;
+      opacity: 1;
+      transform: none;
+    }
+
+    body[data-theme="yoho"] .header-actions .btn {
+      color: #ffeab3;
+      border-color: rgba(255, 221, 151, 0.28);
+      background: rgba(65, 31, 15, 0.46);
+      box-shadow: inset 0 1px rgba(255, 223, 156, 0.12);
+    }
+
+    body[data-theme="yoho"] .content {
+      padding: 30px;
+      gap: 22px;
+    }
+
+    body[data-theme="yoho"] .card {
+      position: relative;
+      overflow: visible;
+      isolation: isolate;
+      padding: 28px 24px 24px;
+      border: 1px solid #b88845;
+      border-radius: 2px;
+      background:
+        radial-gradient(circle at 12% 17%, rgba(128, 84, 37, 0.11) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 81% 62%, rgba(128, 84, 37, 0.08) 0 1px, transparent 1.7px),
+        repeating-linear-gradient(0deg, rgba(91, 57, 25, 0.025) 0 1px, transparent 1px 5px),
+        linear-gradient(145deg, #f8e8b9, #efd69a 62%, #e5c681);
+      clip-path: polygon(0.7% 1%, 16% 0.2%, 31% 1%, 48% 0, 64% 0.8%, 82% 0.1%, 99.3% 0.8%, 100% 18%, 99.4% 38%, 100% 58%, 99.2% 78%, 100% 99%, 82% 99.3%, 64% 100%, 47% 99.2%, 29% 100%, 12% 99.2%, 0.4% 100%, 1% 79%, 0 60%, 0.7% 39%, 0 19%);
+      filter: drop-shadow(0 13px 8px rgba(47, 22, 9, 0.3));
+      box-shadow: none;
+    }
+
+    body[data-theme="yoho"] .card-unix {
+      transform: rotate(-0.35deg);
+    }
+
+    body[data-theme="yoho"] .card-tz {
+      transform: rotate(0.35deg);
+    }
+
+    body[data-theme="yoho"] .card::before,
+    body[data-theme="yoho"] .card::after {
+      content: "";
+      position: absolute;
+      z-index: 3;
+      top: 11px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 38% 34%, #d8d0b8 0 11%, #82786a 18% 48%, #3d362f 54% 70%, #9d9383 76% 100%);
+      box-shadow: 0 2px 2px rgba(53, 30, 13, 0.45);
+    }
+
+    body[data-theme="yoho"] .card::before {
+      left: 16px;
+    }
+
+    body[data-theme="yoho"] .card::after {
+      right: 16px;
+    }
+
+    body[data-theme="yoho"] .card h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.28rem;
+      color: #422711;
+      letter-spacing: 0.01em;
+    }
+
+    body[data-theme="yoho"] .card-unix::selection,
+    body[data-theme="yoho"] .card-tz::selection {
+      background: rgba(8, 125, 128, 0.22);
+    }
+
+    body[data-theme="yoho"] .card-unix .grid::after {
+      content: "N\A✦\A S";
+      white-space: pre;
+      position: absolute;
+      right: 24px;
+      bottom: 24px;
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      border: 2px solid rgba(111, 70, 30, 0.1);
+      border-radius: 50%;
+      color: rgba(111, 70, 30, 0.09);
+      font: 800 0.68rem/0.8 Georgia, serif;
+      transform: rotate(8deg);
+      pointer-events: none;
+    }
+
+    body[data-theme="yoho"] .card p {
+      color: #795a32;
+    }
+
+    body[data-theme="yoho"] input,
+    body[data-theme="yoho"] select {
+      border-radius: 5px;
+      box-shadow: inset 0 2px 5px rgba(95, 57, 24, 0.11);
+    }
+
+    body[data-theme="yoho"] .btn {
+      border-radius: 5px;
+    }
+
+    body[data-theme="yoho"] .btn-primary {
+      border: 1px solid #07565c;
+      background: linear-gradient(180deg, #11979a, #08757a);
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.26), 0 4px 0 #074d52, 0 8px 15px rgba(52, 44, 20, 0.14);
+    }
+
+    body[data-theme="yoho"] .btn-primary:hover {
+      background: linear-gradient(180deg, #19a6a6, #08757a);
+      transform: translateY(-1px);
+    }
+
+    body[data-theme="yoho"] .card .btn-soft {
+      border-color: rgba(102, 61, 25, 0.36);
+      background: rgba(151, 99, 43, 0.12);
+    }
+
+    body[data-theme="yoho"] .quick-btn {
+      color: #583719;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #edd8a2, #dfc285);
+      box-shadow: 0 2px 0 rgba(103, 66, 29, 0.28);
+    }
+
+    body[data-theme="yoho"] .output {
+      position: relative;
+      border: 1px dashed rgba(105, 67, 29, 0.58);
+      border-radius: 3px;
+      box-shadow: inset 0 0 18px rgba(126, 82, 34, 0.08);
+    }
+
+    body[data-theme="yoho"] .footer {
+      color: #efd59b;
+      padding: 0 30px 22px;
+      text-shadow: 0 1px rgba(58, 27, 12, 0.78);
+    }
+
+    body[data-theme="yoho"] .theme-panel {
+      border: 2px solid #61371d;
+      background: linear-gradient(145deg, #f4dfa8, #d8b56e);
+      box-shadow: 0 12px 30px rgba(47, 23, 10, 0.32);
+    }
+
+    body[data-theme="yoho"] dialog {
+      border: 8px solid #65381d;
+      border-radius: 5px;
+      background:
+        repeating-linear-gradient(0deg, rgba(101, 61, 27, 0.025) 0 1px, transparent 1px 5px),
+        linear-gradient(145deg, #f8e8b9, #e4c17b);
+      box-shadow: inset 0 0 0 2px rgba(255, 238, 180, 0.48), 0 30px 80px rgba(31, 24, 11, 0.48);
+    }
+
+    body[data-theme="yoho"] dialog .btn-soft {
+      color: #4a2c15;
+      border-color: rgba(91, 53, 23, 0.38);
+      background: rgba(120, 72, 30, 0.12);
+    }
+
+    body[data-theme="yoho"] .about-hero,
+    body[data-theme="yoho"] .about-detail,
+    body[data-theme="yoho"] .about-meta,
+    body[data-theme="yoho"] .release-card {
+      border-color: rgba(102, 62, 27, 0.36);
+      background: rgba(255, 240, 197, 0.5);
+    }
+
+    @keyframes yoho-waves {
+      to { background-position: 92px 0; }
+    }
+
+    @keyframes yoho-bob {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(7px) rotate(1.5deg); }
+    }
+
+    @keyframes yoho-flag {
+      0%, 100% { transform: skewY(0deg) scaleX(1); }
+      50% { transform: skewY(3deg) scaleX(0.94); }
+    }
+
+    @keyframes yoho-scuttle {
+      0%, 12%, 100% { transform: translateX(0) rotate(-5deg); }
+      44% { transform: translateX(48px) rotate(8deg); }
+      62% { transform: translateX(48px) rotate(-8deg); }
+    }
+
+    @media (max-width: 899px) {
+      body[data-theme="yoho"] {
+        padding: 18px 14px 170px;
+      }
+
+      body[data-theme="yoho"] .content {
+        padding: 18px;
+      }
+
+      body[data-theme="yoho"] .card-unix,
+      body[data-theme="yoho"] .card-tz {
+        transform: none;
+      }
+
+      .yoho-palm-left {
+        left: -112px;
+        transform: scale(0.72) rotate(-5deg);
+      }
+
+      .yoho-palm-right {
+        right: -126px;
+        transform: scale(0.58) rotate(7deg);
+      }
+    }
+
+    @media (max-width: 560px) {
+      body[data-theme="yoho"] .app {
+        border-width: 5px;
+      }
+
+      body[data-theme="yoho"] .header {
+        padding: 20px 18px 18px;
+      }
+
+      body[data-theme="yoho"] .content {
+        padding: 12px;
+        gap: 14px;
+      }
+
+      body[data-theme="yoho"] .card {
+        padding: 25px 16px 18px;
+      }
+
+      body[data-theme="yoho"] .footer {
+        padding: 2px 16px 16px;
+      }
+
+      .yoho-cloud-a {
+        left: -45px;
+      }
+
+      .yoho-island {
+        left: -12%;
+        width: 76vw;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body[data-theme="yoho"] .yoho-scene::before,
+      .yoho-ship,
+      .yoho-flag-cloth,
+      .yoho-crab {
+        animation: none;
+      }
+    }
   </style>
 </head>
 <body data-theme="daylight">
+  <div class="yoho-scene" aria-hidden="true">
+    <div class="yoho-sun"></div>
+    <div class="yoho-cloud yoho-cloud-a"></div>
+    <div class="yoho-cloud yoho-cloud-b"></div>
+    <div class="yoho-island"></div>
+    <div class="yoho-birds"><i></i><i></i><i></i></div>
+    <div class="yoho-ship">
+      <span class="yoho-mast"></span>
+      <span class="yoho-sail"></span>
+      <span class="yoho-sail yoho-sail-small"></span>
+    </div>
+    <div class="yoho-flag"><span class="yoho-flag-cloth">☠</span></div>
+    <div class="yoho-chest"></div>
+    <div class="yoho-x">X</div>
+    <div class="yoho-crab">🦀</div>
+    <div class="yoho-palm yoho-palm-left">
+      <span class="yoho-trunk"></span>
+      <span class="yoho-crown">
+        <i class="yoho-frond"></i><i class="yoho-frond"></i><i class="yoho-frond"></i><i class="yoho-frond"></i>
+        <i class="yoho-frond"></i><i class="yoho-frond"></i><i class="yoho-frond"></i><i class="yoho-frond"></i>
+      </span>
+    </div>
+    <div class="yoho-palm yoho-palm-right">
+      <span class="yoho-trunk"></span>
+      <span class="yoho-crown">
+        <i class="yoho-frond"></i><i class="yoho-frond"></i><i class="yoho-frond"></i><i class="yoho-frond"></i>
+        <i class="yoho-frond"></i><i class="yoho-frond"></i><i class="yoho-frond"></i><i class="yoho-frond"></i>
+      </span>
+    </div>
+  </div>
   <div class="bg-shape shape-a" aria-hidden="true">
     <svg class="globe-linework" viewBox="0 0 200 200">
       <defs>
@@ -1472,37 +2275,37 @@
   <main class="app">
     <header class="header">
       <div class="brand">
-        <h1 class="title">Timetrack</h1>
+        <h1 id="appTitle" class="title">Timetrack</h1>
         <p id="appSubtitle" class="subtitle">Fast timezone conversion with clean local-time output</p>
       </div>
       <div class="header-actions">
         <div id="themeMenu" class="theme-menu">
           <button id="themeToggle" class="btn btn-soft theme-toggle" type="button" aria-haspopup="true" aria-expanded="false">
             <span id="themeIcon" class="emoji-icon" aria-hidden="true">◐</span>
-            Theme
+            <span id="themeButtonLabel">Theme</span>
           </button>
           <div id="themePanel" class="theme-panel" role="menu" aria-label="Theme picker"></div>
         </div>
         <button id="openAbout" class="btn btn-soft btn-icon" type="button">
           <span id="aboutIcon" class="emoji-icon" aria-hidden="true">?</span>
-          About
+          <span id="aboutButtonLabel">About</span>
         </button>
       </div>
     </header>
 
     <section class="content">
       <article class="card card-unix">
-        <h2>UNIX to Local / Timezone</h2>
+        <h2 id="unixTitle">UNIX to Local / Timezone</h2>
         <p id="unixDescription">Convert UNIX timestamps in seconds or milliseconds.</p>
 
         <div class="grid">
           <div class="field span-6">
-            <label for="unixInput">UNIX Timestamp</label>
+            <label id="unixInputLabel" for="unixInput">UNIX Timestamp</label>
             <input id="unixInput" type="text" placeholder="e.g. 1739191200 or 1739191200000" />
           </div>
 
           <div class="field span-6">
-            <label for="unixTargetZone">Output Timezone</label>
+            <label id="unixTargetLabel" for="unixTargetZone">Output Timezone</label>
             <select id="unixTargetZone"></select>
           </div>
 
@@ -1516,37 +2319,37 @@
       </article>
 
       <article class="card card-tz">
-        <h2>Timezone to Timezone</h2>
+        <h2 id="timezoneTitle">Timezone to Timezone</h2>
         <p id="timezoneDescription">Convert UTC, GMT, or international zones into local or selected target zones.</p>
 
         <div class="grid">
           <div class="field span-6">
-            <label for="sourceDateTime">Date & Time</label>
+            <label id="sourceDateTimeLabel" for="sourceDateTime">Date & Time</label>
             <input id="sourceDateTime" type="datetime-local" />
           </div>
 
           <div class="field span-6">
-            <label for="sourceZone">From Timezone</label>
+            <label id="sourceZoneLabel" for="sourceZone">From Timezone</label>
             <select id="sourceZone"></select>
           </div>
 
           <div class="field span-6">
-            <label for="targetZone">To Timezone</label>
+            <label id="targetZoneLabel" for="targetZone">To Timezone</label>
             <select id="targetZone"></select>
           </div>
 
           <div class="field span-12">
-            <label for="sourceQuickZones">Quick source zones</label>
+            <label id="sourceQuickLabel" for="sourceQuickZones">Quick source zones</label>
             <div id="sourceQuickZones" class="quick-strip" role="group" aria-label="Quick source timezone presets"></div>
           </div>
 
           <div class="field span-12">
-            <label for="targetQuickZones">Quick destination zones</label>
+            <label id="targetQuickLabel" for="targetQuickZones">Quick destination zones</label>
             <div id="targetQuickZones" class="quick-strip" role="group" aria-label="Quick destination timezone presets"></div>
           </div>
 
           <div class="field span-6">
-            <label for="zoneCode">Optional Code (UTC/GMT/etc)</label>
+            <label id="zoneCodeLabel" for="zoneCode">Optional Code (UTC/GMT/etc)</label>
             <input id="zoneCode" type="text" placeholder="e.g. India, Brazil, UTC, GMT, Europe, EST" />
           </div>
 
@@ -1562,7 +2365,7 @@
 
     <footer class="footer">
       <span id="localZoneLabel"></span>
-      <span>Timetrack Web App</span>
+      <span id="footerAppLabel">Timetrack Web App</span>
     </footer>
   </main>
 
@@ -1570,15 +2373,15 @@
     <div class="modal-head">
       <div>
         <p class="modal-kicker">Timetrack</p>
-        <h3>About</h3>
+        <h3 id="aboutTitle">About</h3>
       </div>
       <button id="closeAbout" class="btn btn-soft" type="button">Close</button>
     </div>
     <div class="about-hero">
       <div class="about-mark" aria-hidden="true">TT</div>
       <div>
-        <p class="modal-kicker">Timezone utility</p>
-        <h3>Fast customer-time conversion</h3>
+        <p id="aboutKicker" class="modal-kicker">Timezone utility</p>
+        <h3 id="aboutHeadline">Fast customer-time conversion</h3>
         <p id="aboutDescription" class="about-text">
           Timetrack converts UNIX timestamps and customer-provided time references into local or selected timezones.
         </p>
@@ -1587,14 +2390,14 @@
     <div class="about-details">
       <div class="about-detail">
         <span class="detail-label">Version</span>
-        <span class="detail-value">1.2.0-alpha</span>
+        <span class="detail-value">1.3.0-alpha</span>
       </div>
       <div class="about-detail">
-        <span class="detail-label">Format</span>
-        <span class="detail-value">Single-file HTML</span>
+        <span id="formatLabel" class="detail-label">Format</span>
+        <span id="formatValue" class="detail-value">Single-file HTML</span>
       </div>
       <div class="about-detail">
-        <span class="detail-label">Copyright</span>
+        <span id="copyrightLabel" class="detail-label">Copyright</span>
         <span class="detail-value">Taylor Bowden</span>
       </div>
     </div>
@@ -1612,10 +2415,22 @@
       <button id="closeChangelog" class="btn btn-soft" type="button">Close</button>
     </div>
     <div class="about-meta">
-      <span class="version-pill">1.2.0-alpha</span>
-      <p class="copyright-line">Interface redesign release</p>
+      <span class="version-pill">1.3.0-alpha</span>
+      <p class="copyright-line">Yoho Overboard release</p>
     </div>
     <div class="release-stack">
+      <section class="release-card">
+        <div class="release-head">
+          <h4 class="release-title">Yoho Overboard</h4>
+          <span class="version-pill">1.3.0-alpha</span>
+        </div>
+        <ul class="release-notes">
+          <li>Rebuilt Yoho as a full illustrated tropical beach with animated surf, palms, clouds, birds, a pirate ship, flag, treasure chest, and buried treasure.</li>
+          <li>Mounted the app on a rope-bound timber signboard and turned converter panels into weathered parchment sheets held by metal tacks.</li>
+          <li>Extended the easter egg across headings, labels, controls, placeholders, status copy, footer text, and About content.</li>
+          <li>Kept every pirate visual and copy change isolated to Yoho so the normal themes remain unchanged.</li>
+        </ul>
+      </section>
       <section class="release-card">
         <div class="release-head">
           <h4 class="release-title">Interface redesign</h4>
@@ -1742,24 +2557,172 @@
 
     const themedCopy = [
       {
+        element: document.getElementById("appTitle"),
+        normal: "Timetrack",
+        yoho: "Timetrack: Dead Men Tell No Time"
+      },
+      {
         element: appSubtitle,
         normal: "Fast timezone conversion with clean local-time output",
-        yoho: "Chart the hour across every port and tide"
+        yoho: "Chart the hour across every cursed port and tide"
+      },
+      {
+        element: document.getElementById("themeButtonLabel"),
+        normal: "Theme",
+        yoho: "Ship's Colors"
+      },
+      {
+        element: document.getElementById("aboutButtonLabel"),
+        normal: "About",
+        yoho: "Captain's Log"
+      },
+      {
+        element: document.getElementById("unixTitle"),
+        normal: "UNIX to Local / Timezone",
+        yoho: "Epoch Treasure to Port Time"
       },
       {
         element: unixDescription,
         normal: "Convert UNIX timestamps in seconds or milliseconds.",
-        yoho: "Turn old timestamp treasure marks into proper port time."
+        yoho: "Decipher ancient timestamp treasure marks into proper port time."
+      },
+      {
+        element: document.getElementById("unixInputLabel"),
+        normal: "UNIX Timestamp",
+        yoho: "Treasure Mark (UNIX)"
+      },
+      {
+        element: document.getElementById("unixTargetLabel"),
+        normal: "Output Timezone",
+        yoho: "Destination Port"
+      },
+      {
+        element: document.getElementById("unixConvert"),
+        normal: "Convert Timestamp",
+        yoho: "Decode the Treasure Mark"
+      },
+      {
+        element: document.getElementById("unixNow"),
+        normal: "Use Current UNIX",
+        yoho: "Mark This Very Second"
+      },
+      {
+        element: document.getElementById("timezoneTitle"),
+        normal: "Timezone to Timezone",
+        yoho: "Port-to-Port Time"
       },
       {
         element: timezoneDescription,
         normal: "Convert UTC, GMT, or international zones into local or selected target zones.",
-        yoho: "Translate faraway port calls into yer local harbor time."
+        yoho: "Translate faraway port calls into yer own harbor watch."
+      },
+      {
+        element: document.getElementById("sourceDateTimeLabel"),
+        normal: "Date & Time",
+        yoho: "Date & Watch"
+      },
+      {
+        element: document.getElementById("sourceZoneLabel"),
+        normal: "From Timezone",
+        yoho: "Departing Port"
+      },
+      {
+        element: document.getElementById("targetZoneLabel"),
+        normal: "To Timezone",
+        yoho: "Destination Port"
+      },
+      {
+        element: document.getElementById("sourceQuickLabel"),
+        normal: "Quick source zones",
+        yoho: "Favorite departing ports"
+      },
+      {
+        element: document.getElementById("targetQuickLabel"),
+        normal: "Quick destination zones",
+        yoho: "Favorite destination ports"
+      },
+      {
+        element: document.getElementById("zoneCodeLabel"),
+        normal: "Optional Code (UTC/GMT/etc)",
+        yoho: "Scrawled Port Code (UTC/GMT/etc)"
+      },
+      {
+        element: document.getElementById("tzConvert"),
+        normal: "Convert Time",
+        yoho: "Chart the Voyage"
+      },
+      {
+        element: document.getElementById("tzNow"),
+        normal: "Use Current Local Time",
+        yoho: "Use This Watch"
+      },
+      {
+        element: document.getElementById("footerAppLabel"),
+        normal: "Timetrack Web App",
+        yoho: "The Questionably Seaworthy Timetrack"
+      },
+      {
+        element: document.getElementById("aboutTitle"),
+        normal: "About",
+        yoho: "The Captain's Log"
+      },
+      {
+        element: document.getElementById("aboutKicker"),
+        normal: "Timezone utility",
+        yoho: "Chronometer o' the seven seas"
+      },
+      {
+        element: document.getElementById("aboutHeadline"),
+        normal: "Fast customer-time conversion",
+        yoho: "Every port, one proper hour"
       },
       {
         element: aboutDescription,
         normal: "Timetrack converts UNIX timestamps and customer-provided time references into local or selected timezones.",
-        yoho: "Timetrack charts timestamps and customer time clues across the seas into the harbor timezone ye choose."
+        yoho: "Timetrack charts timestamps and mysterious customer time clues across the seas into whichever harbor ye choose. No parrots were consulted."
+      },
+      {
+        element: document.getElementById("formatLabel"),
+        normal: "Format",
+        yoho: "Cargo"
+      },
+      {
+        element: document.getElementById("formatValue"),
+        normal: "Single-file HTML",
+        yoho: "One bottle o' HTML"
+      },
+      {
+        element: document.getElementById("copyrightLabel"),
+        normal: "Copyright",
+        yoho: "Captain"
+      },
+      {
+        element: openChangelog,
+        normal: "Changelog",
+        yoho: "Read the Ship's Ledger"
+      },
+      {
+        element: closeAbout,
+        normal: "Close",
+        yoho: "Batten It Down"
+      },
+      {
+        element: closeChangelog,
+        normal: "Close",
+        yoho: "Batten It Down"
+      }
+    ];
+
+    const themedPlaceholders = [
+      {
+        element: unixInput,
+        normal: "e.g. 1739191200 or 1739191200000",
+        yoho: "e.g. 1739191200, if the map be true..."
+      },
+      {
+        element: zoneCode,
+        normal: "e.g. India, Brazil, UTC, GMT, Europe, EST",
+        yoho: "Name yer port: India, Brazil, UTC, GMT..."
       }
     ];
 
@@ -1961,13 +2924,27 @@
 
     function applyTheme(themeId) {
       const theme = themeOptions.find((item) => item.id === themeId) || themeOptions[0];
+      const isYoho = theme.id === "yoho";
+      const waitingMessages = ["Awaiting input...", "Awaitin' orders, captain..."];
+      const unixWasWaiting = waitingMessages.includes(unixOutput.textContent.trim());
+      const timezoneWasWaiting = waitingMessages.includes(tzOutput.textContent.trim());
+
       document.body.dataset.theme = theme.id;
-      themeToggle.title = `Theme: ${theme.name}`;
-      themeIcon.textContent = theme.id === "yoho" ? "☠" : "◐";
-      aboutIcon.textContent = theme.id === "yoho" ? "✦" : "?";
+      document.title = isYoho ? "Timetrack | Dead Men Tell No Time" : "Timetrack";
+      themeToggle.title = isYoho ? "Change the ship's colors" : `Theme: ${theme.name}`;
+      themeIcon.textContent = isYoho ? "☠" : "◐";
+      aboutIcon.textContent = isYoho ? "⚓" : "?";
       themedCopy.forEach((item) => {
-        item.element.textContent = theme.id === "yoho" ? item.yoho : item.normal;
+        item.element.textContent = isYoho ? item.yoho : item.normal;
       });
+      themedPlaceholders.forEach((item) => {
+        item.element.placeholder = isYoho ? item.yoho : item.normal;
+      });
+      localLabel.textContent = isYoho
+        ? `Yer home port timezone: ${localTimeZone}`
+        : `Your local timezone: ${localTimeZone}`;
+      if (unixWasWaiting) unixOutput.textContent = isYoho ? "Awaitin' orders, captain..." : "Awaiting input...";
+      if (timezoneWasWaiting) tzOutput.textContent = isYoho ? "Awaitin' orders, captain..." : "Awaiting input...";
       setStoredTheme(theme.id);
 
       document.querySelectorAll(".theme-choice").forEach((button) => {

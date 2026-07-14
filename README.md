@@ -13,5 +13,4 @@ Timetrack is a single-file HTML/CSS/JavaScript web app for converting UNIX times
 
 ## Version
 
-`1.1.0-alpha`
-
+`1.2.0-alpha`

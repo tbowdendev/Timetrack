@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Timetrack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-1: #08111d;
@@ -1055,9 +1058,382 @@
         transform: translateY(0);
       }
     }
+
+    /* 1.2 redesign layer */
+    :root {
+      --bg-1: #f4efe6;
+      --bg-2: #dfece8;
+      --page-bg:
+        linear-gradient(rgba(34, 43, 37, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 43, 37, 0.04) 1px, transparent 1px),
+        radial-gradient(circle at 18% 16%, rgba(33, 142, 121, 0.14), transparent 34%),
+        radial-gradient(circle at 86% 78%, rgba(193, 105, 60, 0.12), transparent 32%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      --panel: rgba(255, 254, 249, 0.9);
+      --panel-border: rgba(30, 42, 49, 0.14);
+      --card: rgba(255, 255, 252, 0.94);
+      --text: #162225;
+      --muted: #66757a;
+      --accent: #137c70;
+      --accent-strong: #0e6258;
+      --accent-text: #ffffff;
+      --ok: #147a50;
+      --error: #b8323a;
+      --ring: rgba(19, 124, 112, 0.24);
+      --shadow: 0 26px 70px rgba(18, 33, 37, 0.14);
+      --field-label: #31484d;
+      --input-bg: #fbfaf6;
+      --input-border: rgba(45, 62, 68, 0.18);
+      --button-soft-bg: rgba(22, 34, 37, 0.06);
+      --button-soft-hover: rgba(22, 34, 37, 0.1);
+      --quick-bg: rgba(19, 124, 112, 0.08);
+      --quick-border: rgba(19, 124, 112, 0.18);
+      --quick-hover: rgba(19, 124, 112, 0.14);
+      --output-bg: linear-gradient(180deg, #f9f7ef, #eef5f2);
+      --output-border: rgba(45, 62, 68, 0.14);
+      --output-text: #1b3136;
+      --result-border: rgba(45, 62, 68, 0.12);
+      --result-label: #68777b;
+      --result-value: #162225;
+      --result-status-bg: rgba(20, 122, 80, 0.1);
+      --result-status-text: #147a50;
+      --dialog-bg: #fffef9;
+      --modal-panel: rgba(19, 124, 112, 0.07);
+      --popover: rgba(255, 254, 249, 0.96);
+      --shape-a: radial-gradient(circle at 32% 32%, #42b6a4, #1b615b);
+      --shape-b: radial-gradient(circle at 70% 40%, #d99a5e, #8b4a30);
+      --globe-line: rgba(31, 53, 58, 0.28);
+      --radius: 10px;
+    }
+
+    body[data-theme="dark"] {
+      --bg-1: #111411;
+      --bg-2: #24241b;
+      --page-bg:
+        linear-gradient(rgba(226, 219, 196, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(226, 219, 196, 0.03) 1px, transparent 1px),
+        radial-gradient(circle at 18% 18%, rgba(49, 189, 161, 0.12), transparent 34%),
+        radial-gradient(circle at 84% 78%, rgba(211, 142, 76, 0.1), transparent 32%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      --panel: rgba(20, 24, 23, 0.9);
+      --panel-border: rgba(238, 231, 210, 0.13);
+      --card: rgba(27, 32, 31, 0.92);
+      --text: #f4efe4;
+      --muted: #a9b3ae;
+      --accent: #45d0ae;
+      --accent-strong: #2ab894;
+      --accent-text: #06130f;
+      --ok: #73d6a4;
+      --error: #ff8d8d;
+      --ring: rgba(69, 208, 174, 0.26);
+      --shadow: 0 28px 74px rgba(0, 0, 0, 0.34);
+      --field-label: #c5d0cb;
+      --input-bg: #121816;
+      --input-border: rgba(226, 219, 196, 0.17);
+      --button-soft-bg: rgba(244, 239, 228, 0.07);
+      --button-soft-hover: rgba(244, 239, 228, 0.12);
+      --quick-bg: rgba(69, 208, 174, 0.09);
+      --quick-border: rgba(69, 208, 174, 0.18);
+      --quick-hover: rgba(69, 208, 174, 0.15);
+      --output-bg: linear-gradient(180deg, #1f2826, #171f1d);
+      --output-border: rgba(226, 219, 196, 0.12);
+      --output-text: #eae7da;
+      --result-border: rgba(226, 219, 196, 0.12);
+      --result-label: #a9b3ae;
+      --result-value: #f4efe4;
+      --result-status-bg: rgba(115, 214, 164, 0.12);
+      --result-status-text: #73d6a4;
+      --dialog-bg: #171d1b;
+      --modal-panel: rgba(244, 239, 228, 0.06);
+      --popover: rgba(20, 24, 23, 0.96);
+      --shape-a: radial-gradient(circle at 32% 32%, #3ac9a7, #16463f);
+      --shape-b: radial-gradient(circle at 70% 40%, #d29455, #4b3123);
+      --globe-line: rgba(244, 239, 228, 0.24);
+    }
+
+    body[data-theme="daylight"] {
+      --bg-1: #f4efe6;
+      --bg-2: #dfece8;
+      --page-bg:
+        linear-gradient(rgba(34, 43, 37, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 43, 37, 0.04) 1px, transparent 1px),
+        radial-gradient(circle at 18% 16%, rgba(33, 142, 121, 0.14), transparent 34%),
+        radial-gradient(circle at 86% 78%, rgba(193, 105, 60, 0.12), transparent 32%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      --panel: rgba(255, 254, 249, 0.9);
+      --panel-border: rgba(30, 42, 49, 0.14);
+      --card: rgba(255, 255, 252, 0.94);
+      --text: #162225;
+      --muted: #66757a;
+      --accent: #137c70;
+      --accent-strong: #0e6258;
+      --accent-text: #ffffff;
+      --field-label: #31484d;
+      --input-bg: #fbfaf6;
+      --input-border: rgba(45, 62, 68, 0.18);
+      --button-soft-bg: rgba(22, 34, 37, 0.06);
+      --button-soft-hover: rgba(22, 34, 37, 0.1);
+      --quick-bg: rgba(19, 124, 112, 0.08);
+      --quick-border: rgba(19, 124, 112, 0.18);
+      --quick-hover: rgba(19, 124, 112, 0.14);
+      --output-bg: linear-gradient(180deg, #f9f7ef, #eef5f2);
+      --output-border: rgba(45, 62, 68, 0.14);
+      --output-text: #1b3136;
+      --result-border: rgba(45, 62, 68, 0.12);
+      --result-label: #68777b;
+      --result-value: #162225;
+      --result-status-bg: rgba(20, 122, 80, 0.1);
+      --result-status-text: #147a50;
+      --dialog-bg: #fffef9;
+      --modal-panel: rgba(19, 124, 112, 0.07);
+      --popover: rgba(255, 254, 249, 0.96);
+      --shape-a: radial-gradient(circle at 32% 32%, #42b6a4, #1b615b);
+      --shape-b: radial-gradient(circle at 70% 40%, #d99a5e, #8b4a30);
+      --globe-line: rgba(31, 53, 58, 0.28);
+    }
+
+    body {
+      font-family: "Manrope", "Aptos", "Segoe UI Variable", sans-serif;
+      align-items: start;
+      padding: 28px;
+      background-size: 34px 34px, 34px 34px, auto, auto, auto;
+    }
+
+    .bg-shape {
+      opacity: 0.16;
+      filter: none;
+    }
+
+    body[data-theme="dark"] .bg-shape,
+    body[data-theme="cyber-ember"] .bg-shape,
+    body[data-theme="signal-grove"] .bg-shape,
+    body[data-theme="sky-prism"] .bg-shape {
+      opacity: 0.18;
+    }
+
+    .shape-a {
+      width: 560px;
+      height: 560px;
+      top: -250px;
+      left: -230px;
+    }
+
+    .shape-b {
+      width: 430px;
+      height: 430px;
+      bottom: -210px;
+      right: -170px;
+    }
+
+    .globe-grid {
+      stroke-width: 0.55;
+      opacity: 0.7;
+    }
+
+    .app {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+      border-radius: 16px;
+      backdrop-filter: blur(18px);
+    }
+
+    .header {
+      padding: 22px 24px;
+      align-items: flex-start;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent);
+    }
+
+    .title {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 2rem;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .subtitle {
+      max-width: 620px;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .header-actions {
+      gap: 0.5rem;
+    }
+
+    .emoji-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 1.3rem;
+      height: 1.3rem;
+      border-radius: 999px;
+      background: rgba(127, 127, 127, 0.12);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .btn {
+      border-radius: 8px;
+      min-height: 40px;
+      padding: 0.62rem 0.9rem;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      box-shadow: 0 10px 24px rgba(19, 124, 112, 0.2);
+    }
+
+    .btn-soft {
+      border-color: var(--panel-border);
+    }
+
+    .theme-panel {
+      border-radius: 14px;
+      padding: 0.5rem;
+    }
+
+    .theme-choice {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+    }
+
+    .content {
+      padding: 18px;
+      gap: 14px;
+    }
+
+    .card {
+      border-radius: 8px;
+      padding: 18px;
+      gap: 1rem;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .card h2 {
+      font-size: 1rem;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .card p {
+      line-height: 1.45;
+    }
+
+    .grid {
+      gap: 0.85rem;
+    }
+
+    label {
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    input,
+    select {
+      min-height: 42px;
+      border-radius: 8px;
+      font: inherit;
+      font-size: 0.92rem;
+    }
+
+    .actions {
+      gap: 0.6rem;
+    }
+
+    .quick-strip {
+      gap: 0.4rem;
+    }
+
+    .quick-btn {
+      border-radius: 999px;
+      min-height: 34px;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.78rem;
+    }
+
+    .output {
+      border-radius: 8px;
+      padding: 1rem;
+      min-height: 82px;
+    }
+
+    .result-card {
+      gap: 0.8rem;
+    }
+
+    .result-status {
+      border-radius: 6px;
+      padding: 0.24rem 0.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+    }
+
+    .result-row {
+      grid-template-columns: minmax(82px, 120px) 1fr;
+      gap: 0.85rem;
+      padding-top: 0.55rem;
+    }
+
+    .result-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.07em;
+    }
+
+    .result-value {
+      font-family: "JetBrains Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      padding: 0 18px 18px;
+      font-size: 0.78rem;
+    }
+
+    dialog {
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .about-hero,
+    .about-detail,
+    .about-meta,
+    .release-card {
+      border-radius: 8px;
+    }
+
+    .about-mark {
+      border-radius: 8px;
+    }
+
+    body[data-theme="yoho"] .brand::before {
+      display: none;
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 14px;
+      }
+
+      .header {
+        padding: 18px;
+      }
+
+      .header-actions {
+        width: 100%;
+      }
+
+      .content {
+        padding: 12px;
+      }
+
+      .card {
+        padding: 14px;
+      }
+    }
   </style>
 </head>
-<body data-theme="dark">
+<body data-theme="daylight">
   <div class="bg-shape shape-a" aria-hidden="true">
     <svg class="globe-linework" viewBox="0 0 200 200">
       <defs>
@@ -1102,13 +1478,13 @@
       <div class="header-actions">
         <div id="themeMenu" class="theme-menu">
           <button id="themeToggle" class="btn btn-soft theme-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-            <span id="themeIcon" class="emoji-icon" aria-hidden="true">🎨</span>
+            <span id="themeIcon" class="emoji-icon" aria-hidden="true">◐</span>
             Theme
           </button>
           <div id="themePanel" class="theme-panel" role="menu" aria-label="Theme picker"></div>
         </div>
         <button id="openAbout" class="btn btn-soft btn-icon" type="button">
-          <span id="aboutIcon" class="emoji-icon" aria-hidden="true">ℹ️</span>
+          <span id="aboutIcon" class="emoji-icon" aria-hidden="true">?</span>
           About
         </button>
       </div>
@@ -1211,7 +1587,7 @@
     <div class="about-details">
       <div class="about-detail">
         <span class="detail-label">Version</span>
-        <span class="detail-value">1.1.0-alpha</span>
+        <span class="detail-value">1.2.0-alpha</span>
       </div>
       <div class="about-detail">
         <span class="detail-label">Format</span>
@@ -1236,10 +1612,21 @@
       <button id="closeChangelog" class="btn btn-soft" type="button">Close</button>
     </div>
     <div class="about-meta">
-      <span class="version-pill">1.1.0-alpha</span>
-      <p class="copyright-line">Design expansion release</p>
+      <span class="version-pill">1.2.0-alpha</span>
+      <p class="copyright-line">Interface redesign release</p>
     </div>
     <div class="release-stack">
+      <section class="release-card">
+        <div class="release-head">
+          <h4 class="release-title">Interface redesign</h4>
+          <span class="version-pill">1.2.0-alpha</span>
+        </div>
+        <ul class="release-notes">
+          <li>Rebuilt the default visual system around a cleaner operations-console layout.</li>
+          <li>Refined typography, spacing, controls, results, and modal surfaces.</li>
+          <li>Changed the default theme to Daylight while keeping Dark and alternate themes available.</li>
+        </ul>
+      </section>
       <section class="release-card">
         <div class="release-head">
           <h4 class="release-title">Design expansion</h4>
@@ -1553,9 +1940,9 @@
 
     function getStoredTheme() {
       try {
-        return localStorage.getItem("timetrack-theme") || "dark";
+        return localStorage.getItem("timetrack-theme") || "daylight";
       } catch {
-        return "dark";
+        return "daylight";
       }
     }
 
@@ -1576,8 +1963,8 @@
       const theme = themeOptions.find((item) => item.id === themeId) || themeOptions[0];
       document.body.dataset.theme = theme.id;
       themeToggle.title = `Theme: ${theme.name}`;
-      themeIcon.textContent = theme.id === "yoho" ? "🏴‍☠️" : "🎨";
-      aboutIcon.textContent = theme.id === "yoho" ? "🗺️" : "ℹ️";
+      themeIcon.textContent = theme.id === "yoho" ? "☠" : "◐";
+      aboutIcon.textContent = theme.id === "yoho" ? "✦" : "?";
       themedCopy.forEach((item) => {
         item.element.textContent = theme.id === "yoho" ? item.yoho : item.normal;
       });
